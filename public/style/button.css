@@ -1,0 +1,46 @@
+button {
+	padding: 0.75rem;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 1rem;
+	font-weight: bold;
+  background: var(--plink-grad);
+	color: var(--neutral-high);
+	border: none;
+	border-radius: 1rem;
+	box-shadow: var(--shadow);
+}
+
+button.inverse {
+	background: var(--neutral-grad);
+	color: var(--plink-grad);
+}
+
+button[type='icon'] {
+	padding: 0.25rem;
+	background: var(--neutral-grad);
+	color: var(--plink-grad);
+	border-radius: 50%;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+}
+
+button[type='icon']:active {
+	background: var(--plink-grad);
+	color: var(--neutral-high);
+}
+
+button[type='icon'].inverse {
+	background: var(--plink-grad);
+	color: var(--neutral-high);
+}
+
+button[type='icon'].more {
+	background: var(--neutral);
+	color: var(--plink);
+}
+
+button:disabled {
+	filter: grayscale(0.5);
+}

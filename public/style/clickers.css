@@ -1,0 +1,19 @@
+button, input, textarea, select {
+	outline: 0.125rem solid transparent;
+	outline-offset: 0rem;
+	transition: all var(--transition);
+}
+
+button:hover, input:hover, textarea:hover, select:hover {
+	filter: brightness(1.1);
+}
+
+button:focus, input:focus, textarea:focus, select:focus {
+	outline: 0.125rem solid var(--focus);
+	outline-offset: 0.125rem;
+	filter: brightness(1.1);
+}
+
+button:not(:disabled):active, input:not(:disabled):active, textarea:not(:disabled):active, select:not(:disabled):active {
+	outline-offset: 0rem;
+}

@@ -1,0 +1,1 @@
+export const plural = (number, word) => number === 1 ? word : `${word}s`

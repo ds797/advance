@@ -1,0 +1,14 @@
+input, textarea {
+	padding: 0.5rem;
+	color: var(--neutral-high);
+	background: var(--plink-grad);
+	border: none;
+	border-radius: 0.5rem;
+	font-size: inherit;
+	font-weight: 500;
+}
+
+textarea {
+	resize: none;
+	cursor: text;
+}
