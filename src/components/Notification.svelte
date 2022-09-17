@@ -43,6 +43,7 @@
 	}
 
 	p {
+		width: 17rem;
 		color: white;
 	}
 

@@ -17170,7 +17170,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(checkmarkcircle.$$.fragment);
-    			attr_dev(div, "class", "icon svelte-1izoz7o");
+    			attr_dev(div, "class", "icon svelte-w380aj");
     			add_location(div, file$2, 18, 2, 553);
     		},
     		m: function mount(target, anchor) {
@@ -17219,7 +17219,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(alertcircle.$$.fragment);
-    			attr_dev(div, "class", "icon svelte-1izoz7o");
+    			attr_dev(div, "class", "icon svelte-w380aj");
     			add_location(div, file$2, 14, 2, 423);
     		},
     		m: function mount(target, anchor) {
@@ -17268,7 +17268,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(closecircle.$$.fragment);
-    			attr_dev(div, "class", "icon svelte-1izoz7o");
+    			attr_dev(div, "class", "icon svelte-w380aj");
     			add_location(div, file$2, 10, 2, 292);
     		},
     		m: function mount(target, anchor) {
@@ -17343,13 +17343,13 @@ var app = (function () {
     			t3 = space();
     			p = element("p");
     			t4 = text(t4_value);
-    			attr_dev(h3, "class", "svelte-1izoz7o");
+    			attr_dev(h3, "class", "svelte-w380aj");
     			add_location(h3, file$2, 23, 2, 671);
-    			attr_dev(p, "class", "svelte-1izoz7o");
+    			attr_dev(p, "class", "svelte-w380aj");
     			add_location(p, file$2, 24, 2, 703);
-    			attr_dev(div, "class", "text svelte-1izoz7o");
+    			attr_dev(div, "class", "text svelte-w380aj");
     			add_location(div, file$2, 22, 1, 650);
-    			attr_dev(main, "class", "svelte-1izoz7o");
+    			attr_dev(main, "class", "svelte-w380aj");
     			add_location(main, file$2, 8, 0, 244);
     		},
     		l: function claim(nodes) {
