@@ -9045,10 +9045,7 @@ var app = (function () {
     };
 
     const error = e => {
-    	stack.set([...get_store_value(stack), e]);
-
-    	console.log(get_store_value(stack));
-    	// stack = stack;
+    	stack.set([...get_store_value(stack), { type: 'error', message: e }]);
     };
 
     // const signun = async (email, password) => {
@@ -9059,6 +9056,7 @@ var app = (function () {
     	const { user, error: e } = await supabase.auth.signUp({ email, password });
 
     	if (e) error(e.message);
+    	else stack.set([...get_store_value(stack), { type: 'success', message: 'Check your email to confirm your account creation!' }]);
 
     	return user;
     };
@@ -16542,9 +16540,6 @@ var app = (function () {
     }
 
     function instance$7($$self, $$props, $$invalidate) {
-    	let $user;
-    	validate_store(user, 'user');
-    	component_subscribe($$self, user, $$value => $$invalidate(4, $user = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Login', slots, []);
     	let email, password;
@@ -16595,7 +16590,7 @@ var app = (function () {
     					{
     						name: 'Continue',
     						type: 'action',
-    						click: () => set_store_value(user, $user = signup(email, password), $user)
+    						click: async () => await signup(email, password)
     					}
     				]
     			}
@@ -16620,8 +16615,7 @@ var app = (function () {
     		Menu,
     		email,
     		password,
-    		menu,
-    		$user
+    		menu
     	});
 
     	$$self.$inject_state = $$props => {

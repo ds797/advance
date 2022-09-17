@@ -41,7 +41,7 @@
 			}, {
 				name: 'Continue',
 				type: 'action',
-				click: () => $user = signup(email, password)
+				click: async () => await signup(email, password)
 			}]
 		}]
 	}

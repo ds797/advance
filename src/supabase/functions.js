@@ -11,6 +11,7 @@ export const signup = async (email, password) => {
 	const { user, error: e } = await supabase.auth.signUp({ email, password });
 
 	if (e) error(e.message);
+	else stack.set([...get(stack), { type: 'success', message: 'Check your email to confirm your account creation!' }]);
 
 	return user;
 }
