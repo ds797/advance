@@ -2,7 +2,7 @@
 	import { signout } from '../supabase/functions';
 	import Sync from './Sync.svelte';
 	import Stats from './Stats.svelte';
-	import Account from './svg/Account.svelte';
+	import Account from '../svg/Account.svelte';
 
 	export let items = [];
 </script>

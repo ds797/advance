@@ -4,7 +4,7 @@
 
 <main>
 	<div>
-		<h1 class='gradient'>hero text.</h1>
+		<h1 class='gradient'>Continue to tasks</h1>
 		<Go />
 	</div>
 </main>

@@ -11,6 +11,7 @@
 
 	let position = { gradient: { x: 0, y: 0 }, band: 0 };
 
+	// TODO: Isolate mouse handlers
 	const move = () => {
 		if ($mouse.buttons < 1) return;
 
@@ -61,7 +62,7 @@
 <main>
 	<div class='color'>
 		<div class='gradient' style={`
-			background-image:
+			background:
 				linear-gradient(to bottom, rgba(0, 0, 0, 0%) 0%, rgb(0, 0, 0) 100%),
 				linear-gradient(to right, rgb(255, 255, 255) 5%, hsl(${color.h}, 100%, 50%) 100%);
 		`} bind:this={gradient}>
@@ -95,6 +96,10 @@
 		gap: 1rem;
 		overflow: hidden;
 		transition: all var(--transition);
+	}
+
+	p {
+		user-select: none;
 	}
 
 	.color {

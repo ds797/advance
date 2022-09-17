@@ -1,43 +1,27 @@
 <script>
-	import { ampmify } from '../../timestamp/functions';
 	import Timestamp from '../../timestamp/Timestamp';
-	import Scroller from '../utils/Scroller.svelte';
+	import { minute } from '../../timestamp/functions';
+	import Dial from './Dial.svelte';
+	import Choice from './Choice.svelte';
 
 	export let value = new Timestamp();
 	export let set = v => v;
-	export let ampm = true;
 
-	$: console.log(value)
+	let hour24 = false;
+
+	const ampm = v => {
+		v === 'AM' ? set(value.clone().set({ hours: value.hour % 12 })) : set(value.clone().set({ hours: value.hour % 12 + 12 }))
+	};
+
+	ampm(value.hour < 12 ? 'AM' : 'PM'); // Initial set
 </script>
 
-<!-- TODO: condition-set components not working without set -->
 <main>
-	<Scroller
-		options={Array(24).fill(0).map((_, i) => i)}
-		value={value.hour}
-		display={v => ampm && ampmify(v)}
-		set={v => set(value.clone().set({ hours: v }))}
-	/>
-	<Scroller
-		options={Array(12).fill(0).map((_, i) => i * 5)}
-		value={value.minute}
-		display={v => ampm && ampmify(v)}
-		set={v => set(value.clone().set({ minutes: v }))}
-	/>
-	<Scroller
-		options={Array(12).fill(0).map((_, i) => i * 5)}
-		value={value.minute}
-		display={v => String(v).padStart(2, '0')}
-		set={v => set(value.clone().set({ minutes: v }))}
-	/>
-	<!-- { #if ampm }
-		<Scroller
-			type={'text'}
-			options={['AM', 'PM']}
-			value={value.hour < 12 ? 'AM' : 'PM'}
-			{set}
-		/>
-	{ /if } -->
+	<Dial length={!hour24 ? 12 : 24} spread={1} offset={1} set={v => set(value.clone().set({ hours: v }))} initial={!hour24 ? value.hour % 12 : value.hour} />
+	<Dial length={12} spread={5} set={v => set(value.clone().set({ minutes: v }))} display={v => minute(v)} initial={value.minute} />
+	{ #if !hour24 }
+		<Choice options={['AM', 'PM']} set={ampm} initial={value.hour < 12 ? 'AM' : 'PM'} />
+	{ /if }
 </main>
 
 <style>

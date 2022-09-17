@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 import { preferences } from '../js/stores';
 import Timestamp from './Timestamp';
+import { date as __date } from './date';
 
 export const compare = (ts1, ts2, depth = { milli: true }) => {
 	if (!(ts1 instanceof Timestamp) || !(ts2 instanceof Timestamp)) return {};
@@ -90,27 +91,6 @@ export const ending = date => {
 	return `${date}th`;
 }
 
-export const convert = (ts_px, rect) => {
-	if (!ts_px || !rect) return;
-	const m = rect.height / (24 * 60);
-	const ret = [];
-
-	for (let ts of ts_px) {
-		if (ts instanceof Timestamp) {
-			ret.push((ts.hours * 60 + ts.minutes) * m);
-		} else {
-			const y = (ts.clientY ?? ts.top) - rect.top;
-			console.log(y)
-			ret.push({
-				hours: Math.floor((y / m) / 60),
-				minutes: (y / m) % 60
-			})
-		}
-	}
-	
-	return ret;
-}
-
 export const length = (ts1, ts2) => {
 	return new Timestamp({
 		year: ts2.year - ts1.year,
@@ -121,7 +101,7 @@ export const length = (ts1, ts2) => {
 	});
 }
 
-export const difference = (ts1, ts2) => { // Optimize!!!
+export const difference = (ts1, ts2) => { // TODO: Optimize!!!
 	ts1 = Date.UTC(ts1.year, ts1.month, ts1.date);
 	ts2 = Date.UTC(ts2.year, ts2.month, ts2.date);
 
@@ -130,15 +110,6 @@ export const difference = (ts1, ts2) => { // Optimize!!!
 }
 
 export const ampmify = value => (value - 1) % 12 + 1;
-
-export const padHour = hour => {
-	if (get(preferences).hour24) return hour.toString().padStart(2, '0');
-	return ((hour - 1) % 12 + 1).toString();
-}
-
-export const padMinute = minute => {
-	return minute.toString().padStart(2, '0');
-}
 
 export const stringify = ts => {
 	if (ts === undefined) return undefined;
@@ -162,3 +133,5 @@ export const ampm = v => {
 	if (get(preferences).hour24) return '';
 	else return v < 12 ? 'AM' : 'PM';
 }
+
+export let date = __date;

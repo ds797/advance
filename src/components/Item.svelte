@@ -4,11 +4,11 @@
 	import { remove } from '../supabase/remove';
 	import Complete from './Complete.svelte';
 	import Swatch from './element/Swatch.svelte';
-	import Trash from './svg/Trash.svelte';
+	import Trash from '../svg/Trash.svelte';
 
 	export let item;
 
-	const time = () => {
+	const format = item => {
 		let string = '';
 	
 		if (item.start && item.finish) string = `from ${hour(item.start.hour)}:${minute(item.start.minute)} ${ampm(item.start.hour)} to ${hour(item.finish.hour)}:${minute(item.finish.minute)} ${ampm(item.finish.hour)}`;
@@ -17,6 +17,8 @@
 	
 		return string;
 	}
+
+	$: time = format(item);
 </script>
 
 <main>
@@ -26,7 +28,7 @@
 			<Swatch value={item.color} size='1.5rem' />
 			<h3>{item.title}</h3>
 			{ #if item.start || item.finish }
-				<p>{time()}</p>
+				<p>{time}</p>
 			{ /if }
 		</div>
 		<button type='icon' class='more'

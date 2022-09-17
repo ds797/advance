@@ -1,3 +1,5 @@
+import { date as toDate } from './date';
+
 export default class Timestamp {
 	set({ years, months, date, hours, minutes, seconds, millis }) {
 		let d = toDate(this);
@@ -94,8 +96,4 @@ export default class Timestamp {
 			this.milli = date.milli;
 		}
 	}
-}
-
-const toDate = ({ year = 0, month = 0, date = 1, hour = 0, minute = 0, second = 0, milli = 0 }) => {
-	return new Date(year, month, date, hour, minute, second, milli);
 }

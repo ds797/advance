@@ -1,10 +1,13 @@
 <script>
+	import { Link } from 'svelte-routing';
 </script>
 
 <main>
-	<button>
-		Go
-	</button>
+	<Link to="/tasks">
+		<button>
+			Go
+		</button>
+	</Link>
 </main>
 
 <style></style>

@@ -1,37 +1,26 @@
+import { get } from 'svelte/store';
+import { error } from './error';
 import { supabase } from './init';
+import { stack } from '../js/stores';
 
-export const signup = async (email, password, provider) => {
-	let res;
-	try {
-		if (email && password) res = await supabase.auth.signUp({ email, password });
-		else if (email) res = await supabase.auth.signUp({ email });
-		else if (provider) res = await supabase.auth.signUp({ provider });
-		else res = { error: 'Please provide a sign up method' };
+// const signun = async (email, password) => {
+// 	if (password)
+// }
 
-		let error = res.error;
-		if (error) console.error(error);
+export const signup = async (email, password) => {
+	const { user, error: e } = await supabase.auth.signUp({ email, password });
 
-		console.log('success?', res);
-	} catch (error) {
-		console.error(error.error_description || error.message);
-	}
+	if (e) error(e.message);
+
+	return user;
 }
 
-export const signin = async (email, password, provider) => {
-	let res;
-	try {
-		if (email && password) res = await supabase.auth.signIn({ email, password });
-		else if (email) res = await supabase.auth.signIn({ email });
-		else if (provider) res = await supabase.auth.signIn({ provider });
-		else res = { error: 'Please provide a sign in method' };
+export const signin = async (email, password) => {
+	const { user, error } = await supabase.auth.signIn({ email, password });
 
-		let error = res.error;
-		if (error) console.error(error);
+	if (error) stack.set([...get(stack), error]);
 
-		console.log('success?', res);
-	} catch (error) {
-		console.error(error.error_description || error.message);
-	}
+	return user;
 }
 
 export const signout = async () => {

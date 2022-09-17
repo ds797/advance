@@ -4,5 +4,9 @@
 </script>
 
 <main>
-	<p>{$items.length} {plural($items.length, 'item')} remaining</p>
+	{ #if $items.length }
+		<p>{$items.length} {plural($items.length, 'item')} remaining</p>
+	{ :else }
+		<p>You've completed everything on your list!</p>
+	{ /if }
 </main>

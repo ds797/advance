@@ -1,24 +1,27 @@
 <script>
 	import { supabase } from '../supabase/init';
-	import { route, user, mouse, preferences, items } from '../js/stores';
+	import { route, user, mouse, preferences, items, stack } from '../js/stores';
 	import { save } from '../supabase/save';
-	import Timestamp from '../timestamp/Timestamp';
+	import { read, save as update } from '../supabase/users';
+	import { compare } from '../timestamp/functions';
 	import Bar from './Bar.svelte';
 	import View from './View.svelte';
 	import Modal from './Modal.svelte';
 	import Menu from './Menu.svelte';
-	import Plus from './svg/Plus.svelte';
+	import Plus from '../svg/Plus.svelte';
 	import Login from './Login.svelte';
+	import Stack from './Stack.svelte';
 
 	supabase.auth.onAuthStateChange(async (_, session) => {
 		$user = session?.user;
-		if ($user) {
-			// const { data } = await supabase.from('users').select('*');
-
-			// console.log(data);
-			// $preferences = data;
-		}
+		$preferences = await read();
 	});
+
+	const __update = () => {
+		if ($user) update($user.id, $preferences);
+	}
+
+	$: __update($preferences)
 
 	const down = (e) => {
 		$mouse.buttons = e.buttons;
@@ -44,17 +47,36 @@
 		};
 	}
 
+	const error = item => {
+		if (!item) return 'No item supplied!';
+
+		if (item.start && item.finish && !compare(item.start, item.finish).less) {
+			return 'Ending time must be after starting time!';
+		}
+		return '';
+	}
+
+	const audit = async () => {
+		const err = error($route.save);
+
+		if (err) return $stack = [...$stack, {
+			type: 'error',
+			message: err
+		}];
+
+		const item = $route.save;
+		$route = {};
+		await save(item);
+	}
+
 	$: menu = {
 		name: 'New task',
 		key: async e => {
 			if (!e.ctrlKey || e.key !== 's' && e.key !== 'Enter') return;
 
 			e.preventDefault();
-			const item = $route.save;
-			$route = {};
-			await save(item);
+			audit();
 		},
-		close: () => $route = {},
 		children: [{
 			name: 'Title',
 			type: 'input',
@@ -69,15 +91,15 @@
 		}, {
 			name: 'Start',
 			children: [{
-				type: 'date',
-				value: $route.save?.start ?? new Timestamp(),
-				set: v => $route.save.start = v,
-			}],
+				type: 'time',
+				value: $route.save?.start,
+				set: v => $route.save.start = v
+			}]
 		}, {
 			name: 'Finish',
 			children: [{
-				type: 'date',
-				value: $route.save?.finish ?? new Timestamp(),
+				type: 'time',
+				value: $route.save?.finish,
 				set: v => $route.save.finish = v
 			}],
 		}, {
@@ -103,7 +125,7 @@
 		}, {
 			name: 'Save',
 			type: 'action',
-			click: async () => await save($route.save)
+			click: audit
 		}]
 	};
 </script>
@@ -111,6 +133,7 @@
 <svelte:window on:mousedown={down} on:mousemove={move} on:mouseup={up} />
 
 <main>
+	<Stack />
 	{ #if $user }
 		<Bar items={$items} />
 		<!-- svelte-ignore empty-block -->
@@ -129,8 +152,8 @@
 				else $route = { save: {
 					title: '',
 					desc: '',
-					start: null,
-					end: null,
+					start: undefined,
+					end: undefined,
 					color: { h: 0, s: 0, v: 0 }
 				} };
 			}}>

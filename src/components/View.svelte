@@ -3,13 +3,13 @@
 	import Item from './Item.svelte';
 
 	export let items;
-	$: internal = items.slice(0, 100);
+	// $: internal = items.slice(0, 100);
 	let completed = [], uncompleted = [];
 	let pointer = completed.length;
 
 
-	$: completed = internal.grep((_, index, array) => array[array.length - 1 - index].completed && array[array.length - 1 - index]);
-	$: uncompleted = internal.filter(item => !item.completed);
+	// $: completed = internal.grep((_, index, array) => array[array.length - 1 - index].completed && array[array.length - 1 - index]);
+	// $: uncompleted = internal.filter(item => !item.completed);
 
 	const wheel = e => {
 		if (e.deltaY < 0 && -completed.length < pointer) pointer--;
@@ -36,29 +36,41 @@
 			`
 		};
 	}
+
+	$: console.log(items)
 </script>
 
-<main on:wheel={wheel}>
-	<!-- { #each completed.slice(pointer + completed.length, completed.length) as item, index (item) }
+<main>
+	{ #each items as item (item) }
+		<div>
+			<Item {item} />
+		</div>
+	{ /each }
+</main>
+
+<!-- <main on:wheel={wheel}>
+	{ #each completed.slice(pointer + completed.length, completed.length) as item, index (item) }
 		<div transition:slide={{ duration: 3000 }}>
 			<Item {item} set={v => internal[internal.indexOf(item)] = v} />
 		</div>
-	{ /each } -->
+	{ /each }
 	{ #if uncompleted.length }
-		<!-- { #each uncompleted.slice(clamp(pointer, { min: 0 }), 100 + pointer) as item, index (item) }
+		{ #each uncompleted.slice(clamp(pointer, { min: 0 }), 100 + pointer) as item, index (item) }
 			<div transition:slide={{ duration: 3000 }}>
 				<Item {item} set={v => item = v} />
 			</div>
-		{ /each } -->
+		{ /each }
 		{ #each internal as item, index (item) }
 			<div transition:slide>
 				<Item {item} />
 			</div>
 		{ /each }
 	{ :else }
-		<p>You're caught up!</p>
+		<h1>
+			Click the plus to add your first item!
+		</h1>
 	{ /if }
-</main>
+</main> -->
 
 <style>
 	main {
@@ -66,5 +78,18 @@
 		flex: 1;
 		display: flex;
 		flex-flow: column;
+	}
+
+	h1 {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-size: 4rem;
+	}
+
+	div {
+		padding: 0 10rem;
 	}
 </style>

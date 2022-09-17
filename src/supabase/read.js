@@ -16,10 +16,10 @@ export const read = async () => {
 				cal: item.cal,
 				color: { h: item.h, s: item.s, v: item.v },
 				completed: item.completed,
-				description: item.desc,
+				description: item.description,
 				id: item.id,
-				start: item.start && new Timestamp(new Date(item.start)),
-				end: item.finish && new Timestamp(new Date(item.finish)),
+				start: item.start ? new Timestamp(new Date(item.start)) : undefined,
+				finish: item.finish ? new Timestamp(new Date(item.finish)) : undefined,
 				title: item.title
 			});
 		}

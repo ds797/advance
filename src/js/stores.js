@@ -17,6 +17,8 @@ export const mouse = writable({
 	target: null
 });
 
+export const stack = writable([]);
+
 export const loading = writable(false);
 
 export const route = writable({});
@@ -37,9 +39,6 @@ export const user = writable();
 
 export const preferences = writable({
 	colors: [],
-	theme: { light: true },
-	view: {
-		scrollAmount: 1
-	},
+	theme: { dark: true },
 	hour24: false
 });

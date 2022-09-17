@@ -1,38 +1,51 @@
 import { supabase } from "./init";
 import { get } from 'svelte/store';
 import { items, loading, user } from '../js/stores';
-import { compare } from '../timestamp/functions';
+import { compare, date } from '../timestamp/functions';
 
 const add = (store, item) => {
+	console.log(item)
 	let array = get(store);
 
 	const time = item.start ?? item.end;
 	if (!time) {
 		store.set([item, ...array]);
+	} else {
+		let index = 0;
+
+		for (; index < array.length; index++) {
+			if (!array[index].start && !array[index].end) continue;
+			if (compare(time, array[index].start ?? array[index].end).less) continue;
+	
+			store.set(array.insert(index, item));
+			console.log(get(store))
+			return;
+		}
 	}
 
-	let index = 0;
-
-	for (; index < array.length; index++) {
-		if (!array[index].start) continue;
-		if (compare(time, array[index].start).less) continue;
-
-		store.set(array.insert(index, item));
-		return;
-	}
+	store.set([item, ...array]); // TODO?: Fallback
 }
 
 export const save = async item => {
 	item.title ||= 'Untitled item';
 
+	if (item.id) {
+		items.set(get(items)); // Trigger Svelte reactivity
+		console.log(get(items))
+		// const index = get(items).findIndex(v => v.id === item.id);
+		// console.log(index, get(items)[index], item)
+	}
+
 	item.id || add(items, item);
+
+	console.log(get(items))
 
 	loading.set(true);
 	const { data, error } = await supabase.from('items').upsert({
 		title: item.title,
 		description: item.description,
-		start: item.start ? new Date(item.start.year, item.start.month, item.start.date, item.start.hour, item.start.minute) : undefined,
-		end: item.finish ? new Date(item.finish.year, item.finish.month, item.finish.date, item.finish.hour, item.finish.minute) : undefined,
+		start: item.start ? date(item.start) : undefined,
+		finish: item.finish ? date(item.finish) : undefined,
 		h: item.color.h,
 		s: item.color.s,
 		v: item.color.v,

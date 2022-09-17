@@ -2,7 +2,6 @@
 	import { Router, Route } from 'svelte-routing';
 	import Home from './components/Home.svelte';
 	import Tasks from './components/Tasks.svelte';
-	import FourOhFour from './FourOhFour.svelte';
 
 	let url = '';
 </script>
@@ -14,7 +13,7 @@
 	<Route path='/tasks/*'>
 		<Tasks />
 	</Route>
-	<Route path='*'>
+	<!-- <Route path='*'>
 		<FourOhFour />
-	</Route>
+	</Route> -->
 </Router>

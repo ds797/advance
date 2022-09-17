@@ -1,13 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
 @import url('./style/clickers.css');
 @import url('./style/button.css');
 @import url('./style/input.css');
 
-* {
+:root {
 	/* -- Fonts -- */
-	--font: Inter;
+	--font: Rubik;
+	--weight: 400;
 
 	/* -- Colors -- */
+
+	/* Primary */
+	--red: hsl(0, 100%, 50%);
+	--green: hsl(120, 100%, 50%);
+	--blue: hsl(225, 100%, 50%);
 
 	/* Application */
 		--neutral-high-h: 0;
@@ -22,11 +28,21 @@
 		--neutral-low-s: 0%;
 		--neutral-low-l: 20%;
 	--neutral-low: hsl(var(--neutral-low-h), var(--neutral-low-s), var(--neutral-low-l));
-		--text-h: 0;
-		--text-s: 0%;
-		--text-l: 100%;
-	--text: hsl(var(--text-h), var(--text-s), var(--text-l));
-	--plink-high-h: 340;
+
+		--contrast-high-h: 0;
+		--contrast-high-s: 0%;
+		--contrast-high-l: 100%;
+	--contrast-high: hsl(var(--contrast-high-h), var(--contrast-high-s), var(--contrast-high-l));
+		--contrast-h: 0;
+		--contrast-s: 0%;
+		--contrast-l: 85%;
+	--contrast: hsl(var(--contrast-h), var(--contrast-s), var(--contrast-l));
+		--contrast-low-h: 0;
+		--contrast-low-s: 0%;
+		--contrast-low-l: 70%;
+	--contrast-low: hsl(var(--contrast-low-h), var(--contrast-low-s), var(--contrast-low-l));
+
+		--plink-high-h: 340;
 		--plink-high-s: 100%;
 		--plink-high-l: 60%;
 	--plink-high: hsl(var(--plink-high-h), var(--plink-high-s), var(--plink-high-l));
@@ -50,8 +66,11 @@
 	/* -- Properties -- */
 	--shadow: 1px 1px 0.5rem #0000001B;
 	--transition: 0.2s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
 
+* {
 	font-family: var(--font), monospace;
+	font-weight: var(--weight);
 }
 
 kbd {
@@ -73,7 +92,11 @@ body {
 	box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 { margin: 0; }
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+
+h1 {
+	font-weight: 500;
+}
 
 ::selection {
 	background: var(--neutral-high);

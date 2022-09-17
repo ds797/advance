@@ -17,25 +17,6 @@
 		internal = date;
 	}
 
-	const move = (e, date) => {
-		if ($mouse.buttons !== 1) return; // If not holding left click
-		
-		internal = date;
-
-		// const comparison	= compare(date, value.anchor, { date: true });
-
-		// if (comparison.less) {
-		// 	value.finish = value.anchor;
-		// 	value.start = date;
-		// } else if (comparison.greater) {
-		// 	value.start = value.anchor;
-		// 	value.finish = date;
-		// } else { // comparison.equals
-		// 	value.start = date;
-		// 	value.finish = date;
-		// }
-	}
-
 	const up = () => month = internal.clone({ month: true }).add({ months: Math.ceil(-calendars / 2) });
 
 	$: internal = value;
@@ -61,7 +42,7 @@
 						<p class='day'
 							class:selected={compare(internal, date, { date: true }).equals}
 							class:disabled={!compare(date, month, { month: true }).equals}
-							on:mousedown={() => down(date)} on:mousemove={e => move(e, date)} on:mouseup={up}>
+							on:mousedown={() => down(date)} on:mouseup={up}>
 							{date.date}
 						</p>
 					{ /each }

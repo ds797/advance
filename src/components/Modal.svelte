@@ -30,7 +30,7 @@
 		justify-content: center;
 		align-items: center;
 		background: hsla(var(--neutral-low-h), var(--neutral-low-s), var(--neutral-low-l), 60%);
-		backdrop-filter: blur(1rem);
+		backdrop-filter: blur(0.125rem);
 	}
 
 	.focus {

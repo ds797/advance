@@ -1,6 +1,6 @@
 <script>
 	import { loading } from '../js/stores';
-	import Refresh from './svg/Refresh.svelte';
+	import Refresh from '../svg/Refresh.svelte';
 </script>
 
 { #if $loading }

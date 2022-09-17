@@ -2,10 +2,14 @@
 	import { preferences } from '../../js/stores';
 	import { hexify } from '../../js/colors';
 	import Swatch from './Swatch.svelte';
-	import Close from '../svg/Close.svelte';
+	import Close from '../../svg/Close.svelte';
 
 	export let value = undefined;
 	export let set = v => v;
+
+	const check = (one, two) => {
+		if (one.h === two.h && one.s === two.s && one.l === two.l) return true;
+	}
 </script>
 
 <main>
@@ -15,7 +19,9 @@
 				<Swatch value={color} size='1.5rem' />
 				<p>{color.name ?? hexify(color)}</p>
 			</div>
+			<div on:click|stopPropagation={() => $preferences.colors = $preferences.colors.filter(c => !check(color, c))}>
 			<Close size='1.5rem' stroke='gray' />
+		</div>
 		</div>
 	{ /each }
 </main>

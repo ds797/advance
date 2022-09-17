@@ -1,5 +1,5 @@
 <script>
-	import Check from './svg/Check.svelte';
+	import Check from '../svg/Check.svelte';
 
 	export let checked = false;
 	export let set = v => checked = v;

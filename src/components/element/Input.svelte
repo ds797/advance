@@ -11,7 +11,7 @@
 </script>
 
 <main>
-	<p>{name}</p>
+	<h4>{name}</h4>
 	{ #if type === 'text' }
 		<input type='text' {placeholder} bind:value={internal} {style} />
 	{ :else if type === 'textarea' }
@@ -30,7 +30,7 @@
 		gap: 0.25rem;
 	}
 
-	p {
-		font-weight: bold;
+	h4 {
+		font-weight: 500;
 	}
 </style>
