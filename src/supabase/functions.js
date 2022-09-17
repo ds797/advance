@@ -17,9 +17,9 @@ export const signup = async (email, password) => {
 }
 
 export const signin = async (email, password) => {
-	const { user, error } = await supabase.auth.signIn({ email, password });
+	const { user, error: e } = await supabase.auth.signIn({ email, password });
 
-	if (error) stack.set([...get(stack), error]);
+	if (e) error(e.message);
 
 	return user;
 }

@@ -9062,9 +9062,9 @@ var app = (function () {
     };
 
     const signin = async (email, password) => {
-    	const { user, error } = await supabase.auth.signIn({ email, password });
+    	const { user, error: e } = await supabase.auth.signIn({ email, password });
 
-    	if (error) stack.set([...get_store_value(stack), error]);
+    	if (e) error(e.message);
 
     	return user;
     };
