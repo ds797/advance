@@ -2118,7 +2118,7 @@ var app = (function () {
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block_1$6, create_else_block$4];
+    	const if_block_creators = [create_if_block_1$6, create_else_block$5];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -2193,7 +2193,7 @@ var app = (function () {
     }
 
     // (43:2) {:else}
-    function create_else_block$4(ctx) {
+    function create_else_block$5(ctx) {
     	let current;
     	const default_slot_template = /*#slots*/ ctx[10].default;
     	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[9], get_default_slot_context);
@@ -2241,7 +2241,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$4.name,
+    		id: create_else_block$5.name,
     		type: "else",
     		source: "(43:2) {:else}",
     		ctx
@@ -9399,7 +9399,7 @@ var app = (function () {
     const file$r = "src/components/Stats.svelte";
 
     // (9:1) { :else }
-    function create_else_block$3(ctx) {
+    function create_else_block$4(ctx) {
     	let p;
 
     	const block = {
@@ -9419,7 +9419,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$3.name,
+    		id: create_else_block$4.name,
     		type: "else",
     		source: "(9:1) { :else }",
     		ctx
@@ -9479,7 +9479,7 @@ var app = (function () {
 
     	function select_block_type(ctx, dirty) {
     		if (/*$items*/ ctx[0].length) return create_if_block$8;
-    		return create_else_block$3;
+    		return create_else_block$4;
     	}
 
     	let current_block_type = select_block_type(ctx);
@@ -10755,6 +10755,37 @@ var app = (function () {
     	return child_ctx;
     }
 
+    // (48:1) { :else }
+    function create_else_block$3(ctx) {
+    	let h1;
+
+    	const block = {
+    		c: function create() {
+    			h1 = element("h1");
+    			h1.textContent = "Click the plus to add your first item!\n\t\t";
+    			attr_dev(h1, "class", "svelte-1qp52il");
+    			add_location(h1, file$j, 48, 2, 1310);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h1, anchor);
+    		},
+    		p: noop$2,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$3.name,
+    		type: "else",
+    		source: "(48:1) { :else }",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     // (44:1) { #each items as item (item) }
     function create_each_block$7(key_1, ctx) {
     	let div;
@@ -10832,12 +10863,22 @@ var app = (function () {
     		each_1_lookup.set(key, each_blocks[i] = create_each_block$7(key, child_ctx));
     	}
 
+    	let each_1_else = null;
+
+    	if (!each_value.length) {
+    		each_1_else = create_else_block$3(ctx);
+    	}
+
     	const block = {
     		c: function create() {
     			main = element("main");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
+    			}
+
+    			if (each_1_else) {
+    				each_1_else.c();
     			}
 
     			attr_dev(main, "class", "svelte-1qp52il");
@@ -10853,6 +10894,10 @@ var app = (function () {
     				each_blocks[i].m(main, null);
     			}
 
+    			if (each_1_else) {
+    				each_1_else.m(main, null);
+    			}
+
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
@@ -10863,6 +10908,17 @@ var app = (function () {
     				validate_each_keys(ctx, each_value, get_each_context$7, get_key);
     				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, main, outro_and_destroy_block, create_each_block$7, null, get_each_context$7);
     				check_outros();
+
+    				if (!each_value.length && each_1_else) {
+    					each_1_else.p(ctx, dirty);
+    				} else if (!each_value.length) {
+    					each_1_else = create_else_block$3(ctx);
+    					each_1_else.c();
+    					each_1_else.m(main, null);
+    				} else if (each_1_else) {
+    					each_1_else.d(1);
+    					each_1_else = null;
+    				}
     			}
     		},
     		i: function intro(local) {
@@ -10887,6 +10943,8 @@ var app = (function () {
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].d();
     			}
+
+    			if (each_1_else) each_1_else.d();
     		}
     	};
 

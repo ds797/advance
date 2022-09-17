@@ -45,6 +45,10 @@
 		<div>
 			<Item {item} />
 		</div>
+	{ :else }
+		<h1>
+			Click the plus to add your first item!
+		</h1>
 	{ /each }
 </main>
 
