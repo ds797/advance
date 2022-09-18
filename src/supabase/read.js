@@ -13,17 +13,19 @@ export const read = async () => {
 	if (data) {
 		for (let item of data) {
 			items.push({
-				cal: item.cal,
-				color: { h: item.h, s: item.s, v: item.v },
-				completed: item.completed,
+				title: item.title,
 				description: item.description,
-				id: item.id,
 				start: item.start ? new Timestamp(new Date(item.start)) : undefined,
 				finish: item.finish ? new Timestamp(new Date(item.finish)) : undefined,
-				title: item.title
+				completed: item.completed,
+				color: { h: item.h, s: item.s, v: item.v },
+				cal: item.cal,
+				id: item.id
 			});
 		}
 	}
+
+	console.log({ items })
 
 	return items;
 }

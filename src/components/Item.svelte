@@ -1,5 +1,6 @@
 <script>
-	import { route, items } from '../js/stores';
+	import { route } from '../js/stores';
+  import { save } from '../supabase/save';
 	import { ampm, hour, minute } from '../timestamp/functions';
 	import { remove } from '../supabase/remove';
 	import Complete from './Complete.svelte';
@@ -7,6 +8,12 @@
 	import Trash from '../svg/Trash.svelte';
 
 	export let item;
+	export let set = v => v;
+
+	const complete = async v => {
+		item.completed = v;
+		set(item);
+	}
 
 	const format = item => {
 		let string = '';
@@ -22,7 +29,7 @@
 </script>
 
 <main>
-	<Complete checked={item.completed} set={v => item.completed = v}/>
+	<Complete value={item.completed} set={complete} />
 	<div class='item' on:click={() => $route = { save: item }}>
 		<div>
 			<Swatch value={item.color} size='1.5rem' />

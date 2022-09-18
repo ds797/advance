@@ -1,5 +1,7 @@
 <script>
 	import { cubicOut } from 'svelte/easing';
+  import { save } from '../supabase/save';
+    import { compare } from '../timestamp/functions';
 	import Item from './Item.svelte';
 
 	export let items;
@@ -7,9 +9,8 @@
 	let completed = [], uncompleted = [];
 	let pointer = completed.length;
 
-
-	// $: completed = internal.grep((_, index, array) => array[array.length - 1 - index].completed && array[array.length - 1 - index]);
-	// $: uncompleted = internal.filter(item => !item.completed);
+	$: completed = items.grep((_, index, array) => array[array.length - 1 - index].completed && array[array.length - 1 - index]); // Filter and reverse
+	$: uncompleted = items.filter(item => !item.completed);
 
 	const wheel = e => {
 		if (e.deltaY < 0 && -completed.length < pointer) pointer--;
@@ -37,19 +38,62 @@
 		};
 	}
 
-	$: console.log(items)
+	const set = async item => {
+		items[items.findIndex(v => v.id === item.id)] = item;
+
+		await save(item);
+		console.log(items)
+	}
+
+	const binary = (array, value, compare) => {
+		let start = 0, end = array.length - 1;
+
+		while (start <= end) {
+			const middle = (start + end) >> 1; // Math.floor((start + end) / 2)
+			const comparison = compare(array[middle]);
+			if (start === end) return middle;
+
+			if (comparison < 0) end = middle - 1;
+			else if (0 < comparison) start = middle + 1;
+			else return middle;
+		}
+	}
+
+	const sort = array => {
+		let uncompleted = [];
+		let completed = [];
+
+		for (let i = 0; i < array.length; i++) {
+			if (array[i].completed) completed.push(array[i]);
+			else {
+				uncompleted.splice(binary(uncompleted, array[i], middle => {
+					if (!array[i].start || !middle.start) return 0;
+					const comparison = compare(array[i].start, middle.start);
+					if (comparison.less) return -1;
+					if (comparison.equals) return 0;
+					if (comparison.greater) return 1;
+				}), 0, array[i]);
+			}
+		}
+
+		return completed.concat(uncompleted);
+	}
+
+	$: items = sort(items);
 </script>
 
 <main>
-	{ #each items as item (item) }
-		<div>
-			<Item {item} />
-		</div>
+	{ #if items.length }
+		{ #each items as item (item) }
+			<div transition:slide>
+				<Item {item} set={set} />
+			</div>
+		{ /each }
 	{ :else }
 		<h1>
 			Click the plus to add your first item!
 		</h1>
-	{ /each }
+	{ /if }
 </main>
 
 <!-- <main on:wheel={wheel}>
