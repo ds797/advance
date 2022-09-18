@@ -41,12 +41,18 @@
 	<main transition:slide={{ axis: 'both' }}>
 		<div class='items'>
 			<div class='title'>
-				{ #if !(menu.close ?? true) }
+				{ #if (menu.close ?? true) }
 					<button type='icon' on:click={() => dispatch('close')}>
 						<Chevron direction={'left'} size={'1.5rem'} />
 					</button>
+				{ /if }
 				{ #if menu.name }
 					<h3 class='header' style={'cursor: default;'}>{menu.name}</h3>
+				{ /if }
+				{ #if (menu.close ?? true) }
+					<button type='icon' class='spacer' on:click={() => dispatch('close')}>
+						<Chevron direction={'left'} size={'1.5rem'} />
+					</button>
 				{ /if }
 			</div>
 
@@ -102,9 +108,14 @@
 	h3 {
 		width: 10rem;
 		margin: 0;
+		text-align: center;
 		cursor: pointer;
 		user-select: none;
 		white-space: nowrap;
+	}
+
+	.spacer {
+		visibility: hidden;
 	}
 
 	p {
