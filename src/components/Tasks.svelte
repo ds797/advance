@@ -8,7 +8,7 @@
 	import View from './View.svelte';
 	import Modal from './Modal.svelte';
 	import Menu from './Menu.svelte';
-	import Plus from '../svg/Plus.svelte';
+	import Add from '../icons/filled/Add.svelte';
 	import Login from './Login.svelte';
 	import Stack from './Stack.svelte';
 
@@ -147,17 +147,17 @@
 					<Menu bind:menu on:close={() => $route = {}} />
 				</Modal>
 			{ /if }
-			<button type='icon' class='inverse new' on:click={() => {
+			<button type='icon' class='new' on:click={() => {
 				if ($route.save) $route = {};
 				else $route = { save: {
 					title: '',
 					desc: '',
 					start: undefined,
 					end: undefined,
-					color: { h: 0, s: 0, v: 0 }
+					color: { h: 0, s: 0, v: 100 }
 				} };
 			}}>
-				<Plus size='2rem' />
+				<Add size='2.5rem' />
 		</button>
 		{ /await }
 	{ :else }
@@ -177,7 +177,6 @@
 	}
 
 	.new {
-		padding: 0.5rem;
 		position: fixed;
 		right: 2rem;
 		bottom: 2rem;
