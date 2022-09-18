@@ -64,7 +64,7 @@ import Close from '../svg/Close.svelte';
 							<Time value={child.value} set={child.set ?? blank} />
 						</div>
 					{ :else if child.type === 'color' && child.value !== undefined }
-						<Color value={child.value} on:change={child.set ?? blank} />
+						<Color value={child.value} set={child.set ?? blank} />
 					{ :else if child.type === 'colors' }
 						<Colors set={v => {
 							child.set(v) ?? blank;

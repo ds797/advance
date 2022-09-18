@@ -119,7 +119,7 @@
 				children: [{
 					type: 'color',
 					value: $route.save?.color ?? $preferences?.color ?? { h: 0, s: 0, v: 0 },
-					set: v => $route.save.color = v.detail
+					set: v => $route.save.color = v
 				}]
 			}],
 		}, {

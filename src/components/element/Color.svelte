@@ -1,40 +1,41 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
 	import { mouse, preferences } from '../../js/stores';
 	import { clamp } from '../../js/math';
 
+	export let value;
+	export let set = v => v;
+
 	let gradient, band, pointer = { gradient: null, band: null };
 
-	let color = { h: 0, s: 0, v: 100 };
+	$: position = {
+		gradient: {
+			x: value.s / 100 * (gradient?.offsetWidth - pointer.gradient?.offsetWidth) ?? 0,
+			y: (1 - value.v / 100) * (gradient?.offsetHeight - pointer.gradient?.offsetHeight) ?? 0
+		},
+		band: value.h / 360 * (band?.offsetWidth - pointer.band?.offsetWidth) ?? 0
+	};
 
-	const dispatch = createEventDispatcher();
+	$: console.log(value)
 
-	let position = { gradient: { x: 0, y: 0 }, band: 0 };
-
-	// TODO: Isolate mouse handlers
 	const move = () => {
 		if ($mouse.buttons < 1) return;
 
 		if ($mouse.down.target === gradient) {
 			const rect = gradient.getBoundingClientRect();
 
-
-			position.gradient = {
-				x: clamp($mouse.x - rect.x - pointer.gradient.offsetWidth / 2, { min: 0, max: rect.width - pointer.gradient.offsetWidth }),
-				y: clamp($mouse.y - rect.y - pointer.gradient.offsetHeight / 2, { min: 0, max: rect.height - pointer.gradient.offsetHeight })
-			};
-
-			color.s = (position.gradient.x + position.gradient.x / (rect.width - pointer.gradient.offsetWidth) * pointer.gradient.offsetWidth) / rect.width * 100;
-			color.v = (1 - (position.gradient.y + position.gradient.y / (rect.height - pointer.gradient.offsetHeight) * pointer.gradient.offsetHeight) / rect.height) * 100;
+			set({
+				h: value.h,
+				s: (clamp($mouse.x, { min: rect.x, max: rect.width + rect.x }) - rect.x) / rect.width * 100,
+				v: (1 - (clamp($mouse.y, { min: rect.y, max: rect.height + rect.y }) - rect.y) / rect.height) * 100
+			});
 		} else if ($mouse.down.target === band) {
-			const rect = { band: band.getBoundingClientRect(), pointer: pointer.band.getBoundingClientRect() };
+			const rect = band.getBoundingClientRect();
 
-
-			position.band = clamp($mouse.x - rect.band.x - rect.pointer.width / 2, { min: 0, max: rect.band.width - rect.pointer.width });
-			color.h = (position.band + (position.band / (rect.band.width - rect.pointer.width)) * rect.pointer.width) / rect.band.width * 360;
+			set({ h: (clamp($mouse.x, { min: rect.x, max: rect.width + rect.x }) - rect.x) / rect.width * 360,
+				s: value.s,
+				v: value.v
+			});
 		}
-
-		dispatch('change', color);
 	}
 	
 	const append = (key, value) => {
@@ -48,12 +49,12 @@
 	const find = (h, s, v) => $preferences.colors.findIndex(value => Math.floor(value.h) === Math.floor(h) && Math.floor(value.s) === Math.floor(s) && Math.floor(value.v) === Math.floor(v));
 
 	const add = () => {
-		$preferences.colors = [...$preferences.colors, color];
+		$preferences.colors = [...$preferences.colors, value];
 	}
 
 	let listed;
 
-	$: listed = find(color.h, color.s, color.v, $preferences.colors); // Pass colors for reactivity
+	$: $preferences.colors, listed = find(value.h, value.s, value.v); // Pass colors for reactivity
 
 	$: $mouse.x, move();
 	$: $mouse.y, move();
@@ -64,12 +65,12 @@
 		<div class='gradient' style={`
 			background:
 				linear-gradient(to bottom, rgba(0, 0, 0, 0%) 0%, rgb(0, 0, 0) 100%),
-				linear-gradient(to right, rgb(255, 255, 255) 5%, hsl(${color.h}, 100%, 50%) 100%);
+				linear-gradient(to right, rgb(255, 255, 255) 5%, hsl(${value.h}, 100%, 50%) 100%);
 		`} bind:this={gradient}>
 			<div class='pointer' style={`
 				left: ${position.gradient.x}px;
 				top: ${position.gradient.y}px;
-				background: hsl(${color.h}, ${color.s}%, ${color.v - color.s / 2}%);
+				background: hsl(${value.h}, ${value.s}%, ${value.v - value.s / 2}%);
 			`} bind:this={pointer.gradient} />
 		</div>
 		<div class='band' bind:this={band}>
@@ -78,9 +79,9 @@
 	</div>
 	<div class='type'>
 		<p>hsv(</p>
-		<input type='text' value='{Math.floor(color.h)}' on:keydown|preventDefault={({ key }) => key === 'Backspace' ? color.h = backspace(color.h) : color.h = clamp(append(key, color.h), { min: 0, max: 360 })} />
-		<input type='text' value='{Math.floor(color.s)}%' on:keydown|preventDefault={({ key }) => key === 'Backspace' ? color.s = backspace(color.s) : color.s = clamp(append(key, color.s), { min: 0, max: 100 })} />
-		<input type='text' value='{Math.floor(color.v)}%' on:keydown|preventDefault={({ key }) => key === 'Backspace' ? color.v = backspace(color.v) : color.v = clamp(append(key, color.v), { min: 0, max: 100 })} />
+		<input type='text' value='{Math.floor(value.h)}' on:keydown|preventDefault={({ key }) => key === 'Backspace' ? value.h = backspace(value.h) : value.h = clamp(append(key, value.h), { min: 0, max: 360 })} />
+		<input type='text' value='{Math.floor(value.s)}%' on:keydown|preventDefault={({ key }) => key === 'Backspace' ? value.s = backspace(value.s) : value.s = clamp(append(key, value.s), { min: 0, max: 100 })} />
+		<input type='text' value='{Math.floor(value.v)}%' on:keydown|preventDefault={({ key }) => key === 'Backspace' ? value.v = backspace(value.v) : value.v = clamp(append(key, value.v), { min: 0, max: 100 })} />
 		<p>)</p>
 	</div>
 	<button class:disabled={listed !== -1} on:click={add}>Add to my list</button>
