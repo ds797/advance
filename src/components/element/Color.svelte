@@ -15,8 +15,6 @@
 		band: value.h / 360 * (band?.offsetWidth - pointer.band?.offsetWidth) ?? 0
 	};
 
-	$: console.log(value)
-
 	const move = () => {
 		if ($mouse.buttons < 1) return;
 
@@ -70,7 +68,7 @@
 			<div class='pointer' style={`
 				left: ${position.gradient.x}px;
 				top: ${position.gradient.y}px;
-				background: hsl(${value.h}, ${value.s}%, ${value.v - value.s / 2}%);
+				background: hsl(${value.h}, ${value.s}%, ${(2 - value.s / 100) * value.v / 2}%);
 			`} bind:this={pointer.gradient} />
 		</div>
 		<div class='band' bind:this={band}>
@@ -154,11 +152,5 @@
 		height: 1.5rem;
 		padding: 0.25rem;
 		caret-color: transparent;
-	}
-
-	.disabled {
-		background: lightgray;
-		color: gray;
-		cursor: not-allowed;
 	}
 </style>
