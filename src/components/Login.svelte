@@ -1,6 +1,5 @@
 <script>
 	import { signin, signup } from '../supabase/functions';
-	import { user } from '../js/stores';
 	import Menu from './Menu.svelte';
 	let email, password;
 
@@ -66,7 +65,7 @@
 				}
 			}]
 		}]
-	}
+	};
 </script>
 
 <Menu bind:menu />
