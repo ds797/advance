@@ -10,6 +10,13 @@ button {
 	border: none;
 	border-radius: 1rem;
 	box-shadow: var(--shadow);
+	cursor: pointer;
+}
+
+button[type='icon'] {
+	padding: 0.25rem;
+	border-radius: 50%;
+	aspect-ratio: 1/1;
 }
 
 button.inverse {
@@ -17,44 +24,39 @@ button.inverse {
 	color: var(--contrast-high);
 }
 
-button[type='icon'] {
-	padding: 0.25rem;
+button[type='icon'].inverse {
+	color: var(--plink);
+}
+
+button[disabled] {
+	background: var(--neutral-low);
+	color: var(--contrast-low);
+	cursor: not-allowed;
+}
+
+/* button svg {
+	color: var(--neutral-high);
+}
+
+button:active {
 	background: var(--neutral-high);
 	color: var(--plink);
+}
+
+button:active svg {
+	color: var(--neutral-high);
+}
+
+button[disabled='true'] {
+	background: var(--neutral-low);
+	color: var(--contrast-low);
+}
+
+button[type='icon'] {
+	padding: 0.25rem;
 	border-radius: 50%;
 	aspect-ratio: 1/1;
 	cursor: pointer;
-}
-
-button[type='icon'] svg {
-	color: var(--plink);
-}
-
-button[type='icon']:active {
-	background: var(--plink);
-	color: var(--neutral-high);
-}
-
-button[type='icon']:active svg {
-	color: var(--neutral-high);
-}
-
-button[type='icon'].inverse {
-	background: var(--plink);
-	color: var(--neutral-high);
-}
-
-button[type='icon'].inverse svg {
-	color: var(--neutral-high);
-}
-
-button[type='icon'].inverse:active {
-	background: var(--neutral-high);
-	color: var(--plink);
-}
-
-button[type='icon'].inverse:active svg {
-	color: var(--plink);
 }
 
 button[type='icon'].more {
@@ -64,4 +66,4 @@ button[type='icon'].more {
 
 button:disabled {
 	filter: grayscale(0.5);
-}
+} */
