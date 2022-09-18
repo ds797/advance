@@ -41,9 +41,10 @@
 	<main transition:slide={{ axis: 'both' }}>
 		<div class='items'>
 			<div class='title'>
-				<button type='icon' on:click={() => dispatch('close')}>
-					<Chevron direction={'left'} size={'1.5rem'} />
-				</button>
+				{ #if !(menu.close ?? true) }
+					<button type='icon' on:click={() => dispatch('close')}>
+						<Chevron direction={'left'} size={'1.5rem'} />
+					</button>
 				{ #if menu.name }
 					<h3 class='header' style={'cursor: default;'}>{menu.name}</h3>
 				{ /if }
@@ -51,7 +52,6 @@
 
 			{ #each menu.children ?? [] as child, index }
 				{ #if !child.hide }
-
 					{ #if child.description }
 						<p class={'description'}>{child.description}</p>
 					{ /if }
@@ -81,7 +81,6 @@
 					{ :else if child.type === 'password' }
 						<Input type='password' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css} />
 					{ /if }
-
 				{ /if }
 			{ /each }
 		</div>
@@ -123,10 +122,6 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-	}
-
-	button {
-		width: auto;
 	}
 
 	.description {
