@@ -7,6 +7,8 @@ export const read = async () => {
 
 	if (error || status === 406) console.error(error ?? status);
 
+	console.log(data)
+
 	data = data[0].preferences;
 
 	if (data) return JSON.parse(data);

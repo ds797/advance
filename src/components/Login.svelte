@@ -9,6 +9,14 @@
 		close: false,
 		children: [{
 			name: 'Sign in',
+			key: async e => {
+				if (e.key !== 'Enter') return;
+
+				if (email && password) {
+					await signin(email, password);
+					return true;
+				}
+			},
 			children: [{
 				name: 'Email',
 				type: 'input',
@@ -23,10 +31,21 @@
 			}, {
 				name: 'Continue',
 				type: 'action',
-				click: () => signin(email, password)
+				click: async () => {
+					await signin(email, password);
+					return true;
+				}
 			}]
 		}, {
 			name: 'Sign up',
+			key: async e => {
+				if (e.key !== 'Enter') return;
+
+				if (email && password) {
+					await signup(email, password);
+					return true;
+				}
+			},
 			children: [{
 				name: 'Email',
 				type: 'email',
@@ -41,7 +60,10 @@
 			}, {
 				name: 'Continue',
 				type: 'action',
-				click: async () => await signup(email, password)
+				click: async () => {
+					await signup(email, password);
+					return true;
+				}
 			}]
 		}]
 	}

@@ -9023,6 +9023,8 @@ var app = (function () {
 
     	if (error || status === 406) console.error(error ?? status);
 
+    	console.log(data);
+
     	data = data[0].preferences;
 
     	if (data) return JSON.parse(data);
@@ -15089,19 +15091,19 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[11] = list[i];
-    	child_ctx[13] = i;
+    	child_ctx[12] = list[i];
+    	child_ctx[14] = i;
     	return child_ctx;
     }
 
-    // (83:0) { :else }
+    // (89:0) { :else }
     function create_else_block$1(ctx) {
     	let menu_1;
     	let updating_menu;
     	let current;
 
     	function menu_1_menu_binding(value) {
-    		/*menu_1_menu_binding*/ ctx[9](value);
+    		/*menu_1_menu_binding*/ ctx[10](value);
     	}
 
     	let menu_1_props = {};
@@ -15112,7 +15114,7 @@ var app = (function () {
 
     	menu_1 = new Menu({ props: menu_1_props, $$inline: true });
     	binding_callbacks.push(() => bind(menu_1, 'menu', menu_1_menu_binding));
-    	menu_1.$on("close", /*close_handler*/ ctx[10]);
+    	menu_1.$on("close", /*close_handler*/ ctx[11]);
 
     	const block = {
     		c: function create() {
@@ -15151,14 +15153,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(83:0) { :else }",
+    		source: "(89:0) { :else }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (34:0) { #if show === -1 }
+    // (40:0) { #if show === -1 }
     function create_if_block$3(ctx) {
     	let main;
     	let div1;
@@ -15207,13 +15209,13 @@ var app = (function () {
 
     			attr_dev(button, "type", "icon");
     			attr_dev(button, "class", "svelte-1md52q1");
-    			add_location(button, file$7, 37, 4, 925);
+    			add_location(button, file$7, 43, 4, 967);
     			attr_dev(div0, "class", "title svelte-1md52q1");
-    			add_location(div0, file$7, 36, 3, 901);
+    			add_location(div0, file$7, 42, 3, 943);
     			attr_dev(div1, "class", "items svelte-1md52q1");
-    			add_location(div1, file$7, 35, 2, 878);
+    			add_location(div1, file$7, 41, 2, 920);
     			attr_dev(main, "class", "svelte-1md52q1");
-    			add_location(main, file$7, 34, 1, 833);
+    			add_location(main, file$7, 40, 1, 875);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
@@ -15232,7 +15234,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[5], false, false, false);
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[6], false, false, false);
     				mounted = true;
     			}
     		},
@@ -15250,7 +15252,7 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty & /*menu, show, dispatch, blank, undefined*/ 15) {
+    			if (dirty & /*menu, show, action, blank, undefined, dispatch*/ 47) {
     				each_value = /*menu*/ ctx[0].children ?? [];
     				validate_each_argument(each_value);
     				let i;
@@ -15320,14 +15322,14 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(34:0) { #if show === -1 }",
+    		source: "(40:0) { #if show === -1 }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (41:4) { #if menu.name }
+    // (47:4) { #if menu.name }
     function create_if_block_12(ctx) {
     	let h3;
     	let t_value = /*menu*/ ctx[0].name + "";
@@ -15339,7 +15341,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(h3, "class", "header svelte-1md52q1");
     			attr_dev(h3, "style", 'cursor: default;');
-    			add_location(h3, file$7, 41, 5, 1074);
+    			add_location(h3, file$7, 47, 5, 1116);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -15357,21 +15359,21 @@ var app = (function () {
     		block,
     		id: create_if_block_12.name,
     		type: "if",
-    		source: "(41:4) { #if menu.name }",
+    		source: "(47:4) { #if menu.name }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (47:4) { #if !child.hide }
+    // (53:4) { #if !child.hide }
     function create_if_block_1$3(ctx) {
     	let t;
     	let current_block_type_index;
     	let if_block1;
     	let if_block1_anchor;
     	let current;
-    	let if_block0 = /*child*/ ctx[11].description && create_if_block_11(ctx);
+    	let if_block0 = /*child*/ ctx[12].description && create_if_block_11(ctx);
 
     	const if_block_creators = [
     		create_if_block_2$1,
@@ -15388,15 +15390,15 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type_1(ctx, dirty) {
-    		if (/*child*/ ctx[11].name && (/*child*/ ctx[11].type ?? 'menu') === 'menu') return 0;
-    		if (/*child*/ ctx[11].name && /*child*/ ctx[11].type === 'action') return 1;
-    		if (/*child*/ ctx[11].type === 'input') return 2;
-    		if (/*child*/ ctx[11].type === 'textarea') return 3;
-    		if (/*child*/ ctx[11].type === 'time') return 4;
-    		if (/*child*/ ctx[11].type === 'color' && /*child*/ ctx[11].value !== undefined) return 5;
-    		if (/*child*/ ctx[11].type === 'colors') return 6;
-    		if (/*child*/ ctx[11].type === 'email') return 7;
-    		if (/*child*/ ctx[11].type === 'password') return 8;
+    		if (/*child*/ ctx[12].name && (/*child*/ ctx[12].type ?? 'menu') === 'menu') return 0;
+    		if (/*child*/ ctx[12].name && /*child*/ ctx[12].type === 'action') return 1;
+    		if (/*child*/ ctx[12].type === 'input') return 2;
+    		if (/*child*/ ctx[12].type === 'textarea') return 3;
+    		if (/*child*/ ctx[12].type === 'time') return 4;
+    		if (/*child*/ ctx[12].type === 'color' && /*child*/ ctx[12].value !== undefined) return 5;
+    		if (/*child*/ ctx[12].type === 'colors') return 6;
+    		if (/*child*/ ctx[12].type === 'email') return 7;
+    		if (/*child*/ ctx[12].type === 'password') return 8;
     		return -1;
     	}
 
@@ -15423,7 +15425,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*child*/ ctx[11].description) {
+    			if (/*child*/ ctx[12].description) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
@@ -15496,17 +15498,17 @@ var app = (function () {
     		block,
     		id: create_if_block_1$3.name,
     		type: "if",
-    		source: "(47:4) { #if !child.hide }",
+    		source: "(53:4) { #if !child.hide }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (49:5) { #if child.description }
+    // (55:5) { #if child.description }
     function create_if_block_11(ctx) {
     	let p;
-    	let t_value = /*child*/ ctx[11].description + "";
+    	let t_value = /*child*/ ctx[12].description + "";
     	let t;
 
     	const block = {
@@ -15514,14 +15516,14 @@ var app = (function () {
     			p = element("p");
     			t = text(t_value);
     			attr_dev(p, "class", "" + (null_to_empty('description') + " svelte-1md52q1"));
-    			add_location(p, file$7, 49, 6, 1271);
+    			add_location(p, file$7, 55, 6, 1313);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
     			append_dev(p, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[11].description + "")) set_data_dev(t, t_value);
+    			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[12].description + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -15532,14 +15534,14 @@ var app = (function () {
     		block,
     		id: create_if_block_11.name,
     		type: "if",
-    		source: "(49:5) { #if child.description }",
+    		source: "(55:5) { #if child.description }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (75:43) 
+    // (81:43) 
     function create_if_block_10(ctx) {
     	let input;
     	let current;
@@ -15547,11 +15549,11 @@ var app = (function () {
     	input = new Input({
     			props: {
     				type: "password",
-    				value: /*child*/ ctx[11].value,
-    				name: /*child*/ ctx[11].name,
-    				placeholder: /*child*/ ctx[11].placeholder,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2],
-    				style: /*child*/ ctx[11].css
+    				value: /*child*/ ctx[12].value,
+    				name: /*child*/ ctx[12].name,
+    				placeholder: /*child*/ ctx[12].placeholder,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2],
+    				style: /*child*/ ctx[12].css
     			},
     			$$inline: true
     		});
@@ -15566,11 +15568,11 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const input_changes = {};
-    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[11].name;
-    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[11].placeholder;
-    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
-    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[11].css;
+    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[12].name;
+    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[12].placeholder;
+    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[12].css;
     			input.$set(input_changes);
     		},
     		i: function intro(local) {
@@ -15591,14 +15593,14 @@ var app = (function () {
     		block,
     		id: create_if_block_10.name,
     		type: "if",
-    		source: "(75:43) ",
+    		source: "(81:43) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (73:40) 
+    // (79:40) 
     function create_if_block_9(ctx) {
     	let input;
     	let current;
@@ -15606,11 +15608,11 @@ var app = (function () {
     	input = new Input({
     			props: {
     				type: "email",
-    				value: /*child*/ ctx[11].value,
-    				name: /*child*/ ctx[11].name,
-    				placeholder: /*child*/ ctx[11].placeholder,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2],
-    				style: /*child*/ ctx[11].css
+    				value: /*child*/ ctx[12].value,
+    				name: /*child*/ ctx[12].name,
+    				placeholder: /*child*/ ctx[12].placeholder,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2],
+    				style: /*child*/ ctx[12].css
     			},
     			$$inline: true
     		});
@@ -15625,11 +15627,11 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const input_changes = {};
-    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[11].name;
-    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[11].placeholder;
-    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
-    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[11].css;
+    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[12].name;
+    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[12].placeholder;
+    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[12].css;
     			input.$set(input_changes);
     		},
     		i: function intro(local) {
@@ -15650,20 +15652,20 @@ var app = (function () {
     		block,
     		id: create_if_block_9.name,
     		type: "if",
-    		source: "(73:40) ",
+    		source: "(79:40) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (68:41) 
+    // (74:41) 
     function create_if_block_8(ctx) {
     	let colors;
     	let current;
 
     	function func(...args) {
-    		return /*func*/ ctx[8](/*child*/ ctx[11], ...args);
+    		return /*func*/ ctx[9](/*child*/ ctx[12], ...args);
     	}
 
     	colors = new Colors({ props: { set: func }, $$inline: true });
@@ -15700,22 +15702,22 @@ var app = (function () {
     		block,
     		id: create_if_block_8.name,
     		type: "if",
-    		source: "(68:41) ",
+    		source: "(74:41) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (66:69) 
+    // (72:69) 
     function create_if_block_7(ctx) {
     	let color;
     	let current;
 
     	color = new Color({
     			props: {
-    				value: /*child*/ ctx[11].value,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2]
+    				value: /*child*/ ctx[12].value,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2]
     			},
     			$$inline: true
     		});
@@ -15730,8 +15732,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const color_changes = {};
-    			if (dirty & /*menu*/ 1) color_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) color_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) color_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) color_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
     			color.$set(color_changes);
     		},
     		i: function intro(local) {
@@ -15752,14 +15754,14 @@ var app = (function () {
     		block,
     		id: create_if_block_7.name,
     		type: "if",
-    		source: "(66:69) ",
+    		source: "(72:69) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (61:39) 
+    // (67:39) 
     function create_if_block_6(ctx) {
     	let div;
     	let date;
@@ -15770,16 +15772,16 @@ var app = (function () {
 
     	date = new Date$1({
     			props: {
-    				value: /*child*/ ctx[11].value,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2]
+    				value: /*child*/ ctx[12].value,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2]
     			},
     			$$inline: true
     		});
 
     	time = new Time({
     			props: {
-    				value: /*child*/ ctx[11].value,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2]
+    				value: /*child*/ ctx[12].value,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2]
     			},
     			$$inline: true
     		});
@@ -15792,7 +15794,7 @@ var app = (function () {
     			create_component(time.$$.fragment);
     			t1 = space();
     			attr_dev(div, "class", "time svelte-1md52q1");
-    			add_location(div, file$7, 61, 6, 2078);
+    			add_location(div, file$7, 67, 6, 2077);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -15804,12 +15806,12 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const date_changes = {};
-    			if (dirty & /*menu*/ 1) date_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) date_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) date_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) date_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
     			date.$set(date_changes);
     			const time_changes = {};
-    			if (dirty & /*menu*/ 1) time_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) time_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) time_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) time_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
     			time.$set(time_changes);
     		},
     		i: function intro(local) {
@@ -15834,14 +15836,14 @@ var app = (function () {
     		block,
     		id: create_if_block_6.name,
     		type: "if",
-    		source: "(61:39) ",
+    		source: "(67:39) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (59:43) 
+    // (65:43) 
     function create_if_block_5(ctx) {
     	let input;
     	let current;
@@ -15849,11 +15851,11 @@ var app = (function () {
     	input = new Input({
     			props: {
     				type: "textarea",
-    				value: /*child*/ ctx[11].value,
-    				name: /*child*/ ctx[11].name,
-    				placeholder: /*child*/ ctx[11].placeholder,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2],
-    				style: /*child*/ ctx[11].css
+    				value: /*child*/ ctx[12].value,
+    				name: /*child*/ ctx[12].name,
+    				placeholder: /*child*/ ctx[12].placeholder,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2],
+    				style: /*child*/ ctx[12].css
     			},
     			$$inline: true
     		});
@@ -15868,11 +15870,11 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const input_changes = {};
-    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[11].name;
-    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[11].placeholder;
-    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
-    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[11].css;
+    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[12].name;
+    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[12].placeholder;
+    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[12].css;
     			input.$set(input_changes);
     		},
     		i: function intro(local) {
@@ -15893,25 +15895,25 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(59:43) ",
+    		source: "(65:43) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (57:40) 
+    // (63:40) 
     function create_if_block_4(ctx) {
     	let input;
     	let current;
 
     	input = new Input({
     			props: {
-    				value: /*child*/ ctx[11].value,
-    				name: /*child*/ ctx[11].name,
-    				placeholder: /*child*/ ctx[11].placeholder,
-    				set: /*child*/ ctx[11].set ?? /*blank*/ ctx[2],
-    				style: /*child*/ ctx[11].css
+    				value: /*child*/ ctx[12].value,
+    				name: /*child*/ ctx[12].name,
+    				placeholder: /*child*/ ctx[12].placeholder,
+    				set: /*child*/ ctx[12].set ?? /*blank*/ ctx[2],
+    				style: /*child*/ ctx[12].css
     			},
     			$$inline: true
     		});
@@ -15926,11 +15928,11 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const input_changes = {};
-    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[11].value;
-    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[11].name;
-    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[11].placeholder;
-    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[11].set ?? /*blank*/ ctx[2];
-    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[11].css;
+    			if (dirty & /*menu*/ 1) input_changes.value = /*child*/ ctx[12].value;
+    			if (dirty & /*menu*/ 1) input_changes.name = /*child*/ ctx[12].name;
+    			if (dirty & /*menu*/ 1) input_changes.placeholder = /*child*/ ctx[12].placeholder;
+    			if (dirty & /*menu*/ 1) input_changes.set = /*child*/ ctx[12].set ?? /*blank*/ ctx[2];
+    			if (dirty & /*menu*/ 1) input_changes.style = /*child*/ ctx[12].css;
     			input.$set(input_changes);
     		},
     		i: function intro(local) {
@@ -15951,23 +15953,23 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(57:40) ",
+    		source: "(63:40) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (55:55) 
+    // (61:55) 
     function create_if_block_3(ctx) {
     	let button;
-    	let t_value = /*child*/ ctx[11].name + "";
+    	let t_value = /*child*/ ctx[12].name + "";
     	let t;
     	let mounted;
     	let dispose;
 
     	function click_handler_2() {
-    		return /*click_handler_2*/ ctx[7](/*child*/ ctx[11]);
+    		return /*click_handler_2*/ ctx[8](/*child*/ ctx[12]);
     	}
 
     	const block = {
@@ -15975,7 +15977,7 @@ var app = (function () {
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "svelte-1md52q1");
-    			add_location(button, file$7, 55, 6, 1569);
+    			add_location(button, file$7, 61, 6, 1611);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -15988,7 +15990,7 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[11].name + "")) set_data_dev(t, t_value);
+    			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[12].name + "")) set_data_dev(t, t_value);
     		},
     		i: noop$2,
     		o: noop$2,
@@ -16003,23 +16005,23 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(55:55) ",
+    		source: "(61:55) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (53:5) { #if child.name && (child.type ?? 'menu') === 'menu' }
+    // (59:5) { #if child.name && (child.type ?? 'menu') === 'menu' }
     function create_if_block_2$1(ctx) {
     	let button;
-    	let t_value = /*child*/ ctx[11].name + "";
+    	let t_value = /*child*/ ctx[12].name + "";
     	let t;
     	let mounted;
     	let dispose;
 
     	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[6](/*child*/ ctx[11], /*index*/ ctx[13]);
+    		return /*click_handler_1*/ ctx[7](/*child*/ ctx[12], /*index*/ ctx[14]);
     	}
 
     	const block = {
@@ -16027,7 +16029,7 @@ var app = (function () {
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "inverse svelte-1md52q1");
-    			add_location(button, file$7, 53, 6, 1401);
+    			add_location(button, file$7, 59, 6, 1443);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -16040,7 +16042,7 @@ var app = (function () {
     		},
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
-    			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[11].name + "")) set_data_dev(t, t_value);
+    			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[12].name + "")) set_data_dev(t, t_value);
     		},
     		i: noop$2,
     		o: noop$2,
@@ -16055,18 +16057,18 @@ var app = (function () {
     		block,
     		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(53:5) { #if child.name && (child.type ?? 'menu') === 'menu' }",
+    		source: "(59:5) { #if child.name && (child.type ?? 'menu') === 'menu' }",
     		ctx
     	});
 
     	return block;
     }
 
-    // (46:3) { #each menu.children ?? [] as child, index }
+    // (52:3) { #each menu.children ?? [] as child, index }
     function create_each_block$1(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = !/*child*/ ctx[11].hide && create_if_block_1$3(ctx);
+    	let if_block = !/*child*/ ctx[12].hide && create_if_block_1$3(ctx);
 
     	const block = {
     		c: function create() {
@@ -16079,7 +16081,7 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (!/*child*/ ctx[11].hide) {
+    			if (!/*child*/ ctx[12].hide) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
 
@@ -16121,7 +16123,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(46:3) { #each menu.children ?? [] as child, index }",
+    		source: "(52:3) { #each menu.children ?? [] as child, index }",
     		ctx
     	});
 
@@ -16226,10 +16228,21 @@ var app = (function () {
     	let blank = v => v;
     	const dispatch = createEventDispatcher();
 
-    	const key = e => {
-    		if (menu.key) menu.key(e);
+    	const key = async e => {
+    		if (menu.key) {
+    			const close = await menu.key(e);
+    			if (close) dispatch('close');
+    		}
+
     		if (e.key !== 'Escape') return;
     		if (show === -1) dispatch('close');
+    	};
+
+    	const action = async child => {
+    		if (child.click) {
+    			const close = await child.click();
+    			if (close) dispatch('close');
+    		}
     	};
 
     	let show = -1;
@@ -16245,9 +16258,7 @@ var app = (function () {
     	? child.click()
     	: $$invalidate(1, show = index);
 
-    	const click_handler_2 = child => {
-    		if (child.click && child.click()) dispatch('close');
-    	};
+    	const click_handler_2 = child => action(child);
 
     	const func = (child, v) => {
     		child.set(v) ?? blank;
@@ -16276,14 +16287,11 @@ var app = (function () {
     		Colors,
     		Date: Date$1,
     		Time,
-    		Account,
-    		Bar,
-    		Check,
-    		Close,
     		menu,
     		blank,
     		dispatch,
     		key,
+    		action,
     		show
     	});
 
@@ -16303,6 +16311,7 @@ var app = (function () {
     		blank,
     		dispatch,
     		key,
+    		action,
     		click_handler,
     		click_handler_1,
     		click_handler_2,
@@ -16571,6 +16580,14 @@ var app = (function () {
     		children: [
     			{
     				name: 'Sign in',
+    				key: async e => {
+    					if (e.key !== 'Enter') return;
+
+    					if (email && password) {
+    						await signin(email, password);
+    						return true;
+    					}
+    				},
     				children: [
     					{
     						name: 'Email',
@@ -16588,12 +16605,23 @@ var app = (function () {
     					{
     						name: 'Continue',
     						type: 'action',
-    						click: () => signin(email, password)
+    						click: async () => {
+    							await signin(email, password);
+    							return true;
+    						}
     					}
     				]
     			},
     			{
     				name: 'Sign up',
+    				key: async e => {
+    					if (e.key !== 'Enter') return;
+
+    					if (email && password) {
+    						await signup(email, password);
+    						return true;
+    					}
+    				},
     				children: [
     					{
     						name: 'Email',
@@ -16611,7 +16639,10 @@ var app = (function () {
     					{
     						name: 'Continue',
     						type: 'action',
-    						click: async () => await signup(email, password)
+    						click: async () => {
+    							await signup(email, password);
+    							return true;
+    						}
     					}
     				]
     			}
@@ -18482,7 +18513,7 @@ var app = (function () {
     			create_component(plus.$$.fragment);
     			attr_dev(button, "type", "icon");
     			attr_dev(button, "class", "inverse new svelte-1xc00e2");
-    			add_location(button, file, 149, 3, 3240);
+    			add_location(button, file, 149, 3, 3251);
     		},
     		m: function mount(target, anchor) {
     			mount_component(view, target, anchor);
@@ -18713,12 +18744,12 @@ var app = (function () {
     			kbd3 = element("kbd");
     			kbd3.textContent = "enter";
     			t7 = text(" to save");
-    			add_location(kbd0, file, 145, 19, 3073);
-    			add_location(kbd1, file, 145, 40, 3094);
-    			add_location(kbd2, file, 145, 56, 3110);
-    			add_location(kbd3, file, 145, 77, 3131);
+    			add_location(kbd0, file, 145, 19, 3084);
+    			add_location(kbd1, file, 145, 40, 3105);
+    			add_location(kbd2, file, 145, 56, 3121);
+    			add_location(kbd3, file, 145, 77, 3142);
     			attr_dev(p, "slot", "tip");
-    			add_location(p, file, 145, 5, 3059);
+    			add_location(p, file, 145, 5, 3070);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -18798,7 +18829,7 @@ var app = (function () {
     			t = space();
     			if_block.c();
     			attr_dev(main, "class", "svelte-1xc00e2");
-    			add_location(main, file, 134, 0, 2813);
+    			add_location(main, file, 134, 0, 2824);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -18903,7 +18934,7 @@ var app = (function () {
 
     	supabase.auth.onAuthStateChange(async (_, session) => {
     		set_store_value(user, $user = session?.user, $user);
-    		set_store_value(preferences, $preferences = await read(), $preferences);
+    		if ($user) set_store_value(preferences, $preferences = await read(), $preferences);
     	});
 
     	const __update = () => {

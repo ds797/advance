@@ -7,10 +7,6 @@
 	import Colors from './element/Colors.svelte';
 	import Date from './element/Date.svelte';
 	import Time from './element/Time.svelte';
-import Account from '../svg/Account.svelte';
-import Bar from './Bar.svelte';
-import Check from '../svg/Check.svelte';
-import Close from '../svg/Close.svelte';
 
 	export let menu = {};
 
@@ -18,12 +14,22 @@ import Close from '../svg/Close.svelte';
 	
 	const dispatch = createEventDispatcher();
 	
-	const key = e => {
-		if (menu.key) menu.key(e);
+	const key = async e => {
+		if (menu.key) {
+			const close = await menu.key(e);
+			if (close) dispatch('close');
+		}
 
 		if (e.key !== 'Escape') return;
 
 		if (show === -1) dispatch('close');
+	}
+
+	const action = async child => {
+		if (child.click) {
+			const close = await child.click();
+			if (close) dispatch('close');
+		}
 	}
 
 	let show = -1;
@@ -53,7 +59,7 @@ import Close from '../svg/Close.svelte';
 					{ #if child.name && (child.type ?? 'menu') === 'menu' }
 						<button class='inverse' on:click={() => child.click ? child.click() : show = index}>{child.name}</button>
 					{ :else if child.name && child.type === 'action' }
-						<button on:click={() => { if (child.click && child.click()) dispatch('close'); }}>{child.name}</button>
+						<button on:click={() => action(child)}>{child.name}</button>
 					{ :else if child.type === 'input' }
 						<Input value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css} />
 					{ :else if child.type === 'textarea' }

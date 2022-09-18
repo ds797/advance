@@ -14,7 +14,7 @@
 
 	supabase.auth.onAuthStateChange(async (_, session) => {
 		$user = session?.user;
-		$preferences = await read();
+		if ($user) $preferences = await read();
 	});
 
 	const __update = () => {
