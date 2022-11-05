@@ -9069,6 +9069,10 @@ var app = (function () {
     const signin = async (email, password) => {
     	const { user, error: e } = await supabase.auth.signIn({ email, password });
 
+    	console.log(user, e);
+
+    	if (!user && !e) stack.set([...get_store_value(stack), { type: 'success', message: 'Check your email to log in!' }]);
+
     	if (e) error$1(e.message);
 
     	return user;
@@ -16409,7 +16413,7 @@ var app = (function () {
     	let if_block = (/*item*/ ctx[0].start || /*item*/ ctx[0].finish) && create_if_block$4(ctx);
 
     	trash = new Trash({
-    			props: { size: "1.5rem", color: "red" },
+    			props: { size: "1.5rem" },
     			$$inline: true
     		});
 
@@ -18589,10 +18593,8 @@ var app = (function () {
     				each_value = [.../*$stack*/ ctx[1]].reverse();
     				validate_each_argument(each_value);
     				group_outros();
-    				for (let i = 0; i < each_blocks.length; i += 1) each_blocks[i].r();
     				validate_each_keys(ctx, each_value, get_each_context, get_key);
-    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div0, fix_and_outro_and_destroy_block, create_each_block, null, get_each_context);
-    				for (let i = 0; i < each_blocks.length; i += 1) each_blocks[i].a();
+    				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each_1_lookup, div0, outro_and_destroy_block, create_each_block, null, get_each_context);
     				check_outros();
     			}
     		},
@@ -18659,8 +18661,6 @@ var app = (function () {
     	let t;
     	let div_intro;
     	let div_outro;
-    	let rect;
-    	let stop_animation = noop$2;
     	let current;
     	let mounted;
     	let dispose;
@@ -18700,18 +18700,6 @@ var app = (function () {
     			const notification_changes = {};
     			if (dirty & /*$stack*/ 2) notification_changes.notification = /*notification*/ ctx[15];
     			notification.$set(notification_changes);
-    		},
-    		r: function measure() {
-    			rect = div.getBoundingClientRect();
-    		},
-    		f: function fix() {
-    			fix_position(div);
-    			stop_animation();
-    			add_transform(div, rect);
-    		},
-    		a: function animate() {
-    			stop_animation();
-    			stop_animation = create_animation(div, rect, flip, {});
     		},
     		i: function intro(local) {
     			if (current) return;

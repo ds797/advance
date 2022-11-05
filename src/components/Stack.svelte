@@ -73,7 +73,7 @@
 		<button class="clear" class:disabled={!$stack.length} on:click={() => $stack = []} transition:fly={{ x: -50 }}>Clear</button>
 		<div class="wrapper">
 			{ #each [...$stack].reverse() as notification, i (notification) }
-				<div on:click|stopPropagation={() => splack(notification)} in:fly={{ x: -50, delay: (i + 1) * 50 }} out:fly={{ x: -50 }} animate:flip>
+				<div on:click|stopPropagation={() => splack(notification)} in:fly={{ x: -50, delay: (i + 1) * 50 }} out:fly={{ x: -50 }}>
 					<Notification {notification} />
 				</div>
 			{ /each }

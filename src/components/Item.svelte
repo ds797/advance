@@ -42,7 +42,7 @@
 			disabled={!item.id ? true : false}
 			on:click|stopPropagation={async () => item.id && await remove(item.id)}
 		>
-			<Trash size='1.5rem' color='red' />
+			<Trash size='1.5rem' />
 		</button>
 	</div>
 </main>
