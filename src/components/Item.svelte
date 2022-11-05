@@ -1,6 +1,5 @@
 <script>
-	import { route } from '../js/stores';
-  import { save } from '../supabase/save';
+	import { route, preferences } from '../js/stores';
 	import { ampm, hour, minute } from '../timestamp/functions';
 	import { remove } from '../supabase/remove';
 	import Complete from './Complete.svelte';
@@ -26,6 +25,7 @@
 	}
 
 	$: time = format(item);
+	$: $preferences.hour24, time = format(item);
 </script>
 
 <main>

@@ -1,4 +1,5 @@
 <script>
+	import { preferences } from '../../js/stores';
 	import Timestamp from '../../timestamp/Timestamp';
 	import { minute } from '../../timestamp/functions';
 	import Dial from './Dial.svelte';
@@ -6,8 +7,6 @@
 
 	export let value = new Timestamp();
 	export let set = v => v;
-
-	let hour24 = false;
 
 	const ampm = v => {
 		v === 'AM' ? set(value.clone().set({ hours: value.hour % 12 })) : set(value.clone().set({ hours: value.hour % 12 + 12 }))
@@ -17,9 +16,9 @@
 </script>
 
 <main>
-	<Dial length={!hour24 ? 12 : 24} spread={1} offset={1} set={v => set(value.clone().set({ hours: v }))} initial={!hour24 ? value.hour % 12 : value.hour} />
+	<Dial length={!$preferences.hour24 ? 12 : 24} spread={1} offset={1} set={v => set(value.clone().set({ hours: v }))} initial={!$preferences.hour24 ? value.hour % 12 : value.hour} />
 	<Dial length={12} spread={5} set={v => set(value.clone().set({ minutes: v }))} display={v => minute(v)} initial={value.minute} />
-	{ #if !hour24 }
+	{ #if !$preferences.hour24 }
 		<Choice options={['AM', 'PM']} set={ampm} initial={value.hour < 12 ? 'AM' : 'PM'} />
 	{ /if }
 </main>

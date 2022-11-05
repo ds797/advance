@@ -17,7 +17,10 @@
 			children: [{
 				name: '24-hour time',
 				type: 'toggle',
-				set: v => $preferences.hour24 = v
+				set: v => {
+					console.log(v)
+					$preferences.hour24 = v;
+				}
 			}]
 		}, {
 			name: 'Sign out',
