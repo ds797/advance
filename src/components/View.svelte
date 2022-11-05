@@ -138,6 +138,6 @@
 	}
 
 	div {
-		padding: 0 10rem;
+		padding: 0 min(10%, 10rem);
 	}
 </style>

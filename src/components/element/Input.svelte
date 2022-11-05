@@ -11,14 +11,22 @@
 </script>
 
 <main>
-	<h4>{name}</h4>
 	{ #if type === 'text' }
+		<h4>{name}</h4>
 		<input type='text' {placeholder} bind:value={internal} {style} />
 	{ :else if type === 'textarea' }
+		<h4>{name}</h4>
 		<textarea type='text' {placeholder} bind:value={internal} {style} />
+	{ :else if type === 'toggle' }
+		<div>
+			{name}
+			<input type='checkbox' bind:checked={internal} />
+		</div>
 	{ :else if type === 'email' }
+		<h4>{name}</h4>
 		<input type='email' {placeholder} bind:value={internal} {style} />
 	{ :else if type === 'password' }
+		<h4>{name}</h4>
 		<input type='password' {placeholder} bind:value={internal} {style} />
 	{ /if }
 </main>
@@ -32,5 +40,18 @@
 
 	h4 {
 		font-weight: 500;
+	}
+
+	div {
+		padding: 0.75rem;
+		display: flex;
+		justify-content: space-between;
+		background: var(--neutral-high);
+		color: var(--contrast-high);
+		border-radius: 1rem;
+	}
+
+	input[type='checkbox'] {
+		accent-color: var(--plink);
 	}
 </style>

@@ -1,4 +1,5 @@
 <script>
+	import { preferences } from '../js/stores';
 	import { signout } from '../supabase/functions';
 	import Sync from './Sync.svelte';
 	import Stats from './Stats.svelte';
@@ -14,7 +15,9 @@
 		children: [{
 			name: 'Settings',
 			children: [{
-				name: 'Test setting'
+				name: '24-hour time',
+				type: 'toggle',
+				set: v => $preferences.hour24 = v
 			}]
 		}, {
 			name: 'Sign out',

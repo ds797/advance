@@ -4,27 +4,23 @@
 
 <main>
 	<div>
-		<h1 class='gradient'>Continue to tasks</h1>
+		<h1>Tasks</h1>
 		<Go />
 	</div>
 </main>
 
 <style>
 	main {
+		height: 100%;
 		display: flex;
 		flex-flow: column;
+		justify-content: center;
+		align-items: center;
 		overflow: hidden;
 	}
 
 	div {
-		margin-left: min(10rem, 15%);
 		display: flex;
-		flex-flow: column;
-	}
-
-	h1 {
-		width: fit-content;
-		font-size: min(6rem, 30vh);
-		font-weight: 700;
+		gap: 2rem;
 	}
 </style>

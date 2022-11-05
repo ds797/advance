@@ -130,6 +130,6 @@
 		flex-flow: column;
 		align-items: flex-start;
 		gap: 1rem;
-		overflow: scroll;
+		overflow: auto;
 	}
 </style>

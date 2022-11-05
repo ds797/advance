@@ -67,14 +67,16 @@
 					{ :else if child.name && child.type === 'action' }
 						<button on:click={() => action(child)}>{child.name}</button>
 					{ :else if child.type === 'input' }
-						<Input value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css} />
+						<Input value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css ?? ''} />
 					{ :else if child.type === 'textarea' }
-						<Input type='textarea' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css} />
+						<Input type='textarea' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={'height: 3rem; ' + child.css ?? ''} />
 					{ :else if child.type === 'time' }
 						<div class="time">
 							<Date value={child.value} set={child.set ?? blank} />
 							<Time value={child.value} set={child.set ?? blank} />
 						</div>
+					{ :else if child.type === 'toggle' }
+						<Input type='toggle' value={child.value} name={child.name} set={child.set ?? blank} />
 					{ :else if child.type === 'color' && child.value !== undefined }
 						<Color value={child.value} set={child.set ?? blank} />
 					{ :else if child.type === 'colors' }
@@ -83,9 +85,9 @@
 							dispatch('close');
 						}} />
 					{ :else if child.type === 'email' }
-						<Input type='email' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css} />
+						<Input type='email' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css ?? ''} />
 					{ :else if child.type === 'password' }
-						<Input type='password' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css} />
+						<Input type='password' value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css ?? ''} />
 					{ /if }
 				{ /if }
 			{ /each }
