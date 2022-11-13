@@ -28,7 +28,7 @@ button[type='icon'].inverse {
 	color: var(--plink);
 }
 
-button[disabled] {
+button.disabled {
 	background: var(--neutral-low);
 	color: var(--contrast-low);
 	cursor: not-allowed;

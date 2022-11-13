@@ -8,7 +8,7 @@
 	export let set = v => v;
 
 	const check = (one, two) => {
-		if (one.h === two.h && one.s === two.s && one.l === two.l) return true;
+		if (one.h === two.h && one.s === two.s && one.v === two.v) return true;
 	}
 </script>
 
@@ -17,7 +17,7 @@
 		<div class='color' on:click={() => set(color)} >
 			<div class='name' style='{index === value && 'background: var(--secondary); color: var(--primary);'}'>
 				<Swatch value={color} size='1.5rem' />
-				<p>{color.name ?? hexify(color)}</p>
+				<p>{color.name ?? hexify(color.h, color.s, color.v)}</p>
 			</div>
 			<div on:click|stopPropagation={() => $preferences.colors = $preferences.colors.filter(c => !check(color, c))}>
 			<Close size='1.5rem' stroke='gray' />

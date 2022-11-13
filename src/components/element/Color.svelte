@@ -1,6 +1,7 @@
 <script>
 	import { mouse, preferences } from '../../js/stores';
 	import { clamp } from '../../js/math';
+  import { hexify } from '../../js/colors';
 
 	export let value;
 	export let set = v => v;
@@ -44,7 +45,7 @@
 
 	const backspace = value => Math.floor(value / 10);
 
-	const find = (h, s, v) => $preferences.colors.findIndex(value => Math.floor(value.h) === Math.floor(h) && Math.floor(value.s) === Math.floor(s) && Math.floor(value.v) === Math.floor(v));
+	const find = (h, s, v) => $preferences.colors.findIndex(hsv => hexify(h, s, v) === hexify(hsv.h, hsv.s, hsv.v));
 
 	const add = () => {
 		$preferences.colors = [...$preferences.colors, value];
@@ -52,7 +53,7 @@
 
 	let listed;
 
-	$: $preferences.colors, listed = find(value.h, value.s, value.v); // Pass colors for reactivity
+	$: $preferences.colors, listed = find(value.h, value.s, value.v);
 
 	$: $mouse.x, move();
 	$: $mouse.y, move();
