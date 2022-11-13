@@ -1,5 +1,5 @@
 <script>
-	import { signin, signup } from '../supabase/functions';
+	import { signin } from '../supabase/functions';
 	import Menu from './Menu.svelte';
 	let email, password;
 

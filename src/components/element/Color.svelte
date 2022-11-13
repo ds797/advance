@@ -48,6 +48,8 @@
 	const find = (h, s, v) => $preferences.colors.findIndex(hsv => hexify(h, s, v) === hexify(hsv.h, hsv.s, hsv.v));
 
 	const add = () => {
+		if (listed !== -1) return;
+
 		$preferences.colors = [...$preferences.colors, value];
 	}
 

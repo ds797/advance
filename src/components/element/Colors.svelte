@@ -1,8 +1,9 @@
 <script>
 	import { preferences } from '../../js/stores';
+	import { slide } from '../../js/transition';
 	import { hexify } from '../../js/colors';
 	import Swatch from './Swatch.svelte';
-	import Close from '../../svg/Close.svelte';
+	import Close from '../../icons/filled/Close.svelte';
 
 	export let value = undefined;
 	export let set = v => v;
@@ -13,15 +14,17 @@
 </script>
 
 <main>
-	{ #each $preferences.colors ?? [] as color, index }
-		<div class='color' on:click={() => set(color)} >
+	{ #each $preferences.colors ?? [] as color, index (color) }
+		<div class='color' on:click={() => set(color)} transition:slide|local>
 			<div class='name' style='{index === value && 'background: var(--secondary); color: var(--primary);'}'>
 				<Swatch value={color} size='1.5rem' />
 				<p>{color.name ?? hexify(color.h, color.s, color.v)}</p>
 			</div>
 			<div on:click|stopPropagation={() => $preferences.colors = $preferences.colors.filter(c => !check(color, c))}>
-			<Close size='1.5rem' stroke='gray' />
-		</div>
+				<button type='icon'>
+					<Close size='1.5rem' fill='var(--neutral-high)' />
+				</button>
+			</div>
 		</div>
 	{ /each }
 </main>
