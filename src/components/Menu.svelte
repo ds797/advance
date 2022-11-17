@@ -38,7 +38,7 @@
 <svelte:window on:keydown={key} />
 
 { #if show === -1 }
-	<main transition:slide={{ axis: 'both' }}>
+	<main transition:slide={{ axis: 'both', duration: 5000 }}>
 		<div class='items'>
 			<div class='title'>
 				{ #if (menu.close ?? true) }

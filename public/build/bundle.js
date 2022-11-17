@@ -2969,6 +2969,8 @@ var app = (function () {
     	let h1;
     	let t1;
     	let go;
+    	let t2;
+    	let p;
     	let current;
     	go = new Go({ $$inline: true });
 
@@ -2980,10 +2982,15 @@ var app = (function () {
     			h1.textContent = "Tasks";
     			t1 = space();
     			create_component(go.$$.fragment);
+    			t2 = space();
+    			p = element("p");
+    			p.textContent = "Just clicked the magic link? There's currently a bug where once you click \"Go\", you'll be back at the login page. To fix this, just click \"Go\" and then reload the page. A solution is being implemented!";
     			add_location(h1, file$u, 6, 2, 68);
-    			attr_dev(div, "class", "svelte-lm21f4");
+    			attr_dev(div, "class", "svelte-xowzl1");
     			add_location(div, file$u, 5, 1, 60);
-    			attr_dev(main, "class", "svelte-lm21f4");
+    			attr_dev(p, "class", "svelte-xowzl1");
+    			add_location(p, file$u, 9, 1, 101);
+    			attr_dev(main, "class", "svelte-xowzl1");
     			add_location(main, file$u, 4, 0, 52);
     		},
     		l: function claim(nodes) {
@@ -2995,6 +3002,8 @@ var app = (function () {
     			append_dev(div, h1);
     			append_dev(div, t1);
     			mount_component(go, div, null);
+    			append_dev(main, t2);
+    			append_dev(main, p);
     			current = true;
     		},
     		p: noop$2,
@@ -13951,9 +13960,9 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "title svelte-1yjxt2z");
-    			add_location(div0, file$e, 42, 3, 943);
+    			add_location(div0, file$e, 42, 3, 959);
     			attr_dev(div1, "class", "items svelte-1yjxt2z");
-    			add_location(div1, file$e, 41, 2, 920);
+    			add_location(div1, file$e, 41, 2, 936);
     			attr_dev(main, "class", "svelte-1yjxt2z");
     			add_location(main, file$e, 40, 1, 875);
     		},
@@ -14072,7 +14081,7 @@ var app = (function () {
     			}
 
     			add_render_callback(() => {
-    				if (!main_transition) main_transition = create_bidirectional_transition(main, slide, { axis: 'both' }, true);
+    				if (!main_transition) main_transition = create_bidirectional_transition(main, slide, { axis: 'both', duration: 5000 }, true);
     				main_transition.run(1);
     			});
 
@@ -14087,7 +14096,7 @@ var app = (function () {
     				transition_out(each_blocks[i]);
     			}
 
-    			if (!main_transition) main_transition = create_bidirectional_transition(main, slide, { axis: 'both' }, false);
+    			if (!main_transition) main_transition = create_bidirectional_transition(main, slide, { axis: 'both', duration: 5000 }, false);
     			main_transition.run(0);
     			current = false;
     		},
@@ -14130,7 +14139,7 @@ var app = (function () {
     			button = element("button");
     			create_component(chevron.$$.fragment);
     			attr_dev(button, "type", "icon");
-    			add_location(button, file$e, 44, 5, 1001);
+    			add_location(button, file$e, 44, 5, 1017);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -14183,7 +14192,7 @@ var app = (function () {
     			t = text(t_value);
     			attr_dev(h3, "class", "header svelte-1yjxt2z");
     			attr_dev(h3, "style", 'cursor: default;');
-    			add_location(h3, file$e, 49, 5, 1164);
+    			add_location(h3, file$e, 49, 5, 1180);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -14227,7 +14236,7 @@ var app = (function () {
     			create_component(chevron.$$.fragment);
     			attr_dev(button, "type", "icon");
     			attr_dev(button, "class", "spacer svelte-1yjxt2z");
-    			add_location(button, file$e, 52, 5, 1277);
+    			add_location(button, file$e, 52, 5, 1293);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -14420,7 +14429,7 @@ var app = (function () {
     			p = element("p");
     			t = text(t_value);
     			attr_dev(p, "class", "" + (null_to_empty('description') + " svelte-1yjxt2z"));
-    			add_location(p, file$e, 61, 6, 1549);
+    			add_location(p, file$e, 61, 6, 1565);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -14753,7 +14762,7 @@ var app = (function () {
     			create_component(time.$$.fragment);
     			t1 = space();
     			attr_dev(div, "class", "time svelte-1yjxt2z");
-    			add_location(div, file$e, 73, 6, 2344);
+    			add_location(div, file$e, 73, 6, 2360);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14935,7 +14944,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			t = text(t_value);
-    			add_location(button, file$e, 67, 6, 1847);
+    			add_location(button, file$e, 67, 6, 1863);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -14987,7 +14996,7 @@ var app = (function () {
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "inverse");
-    			add_location(button, file$e, 65, 6, 1679);
+    			add_location(button, file$e, 65, 6, 1695);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
