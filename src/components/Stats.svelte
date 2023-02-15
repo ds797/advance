@@ -1,11 +1,15 @@
 <script>
-	import { items } from '../js/stores'; // TODO: .finish
+	import { items } from '../js/stores'; // TODO: Instant update
 	import { plural } from '../js/language';
+
+	let uncompleted = [];
+
+	$: uncompleted = $items.filter(item => !item.completed);
 </script>
 
 <main>
-	{ #if $items.length }
-		<p>{$items.length} {plural($items.length, 'item')} remaining</p>
+	{ #if uncompleted.length }
+		<p>{uncompleted.length} {plural(uncompleted.length, 'item')} remaining</p>
 	{ :else }
 		<p>You've completed everything on your list!</p>
 	{ /if }
