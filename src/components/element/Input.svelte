@@ -18,10 +18,10 @@
 		<h4>{name}</h4>
 		<textarea type='text' {placeholder} bind:value={internal} {style} />
 	{ :else if type === 'toggle' }
-		<div>
+		<label>
 			{name}
 			<input type='checkbox' bind:checked={internal} />
-		</div>
+		</label>
 	{ :else if type === 'email' }
 		<h4>{name}</h4>
 		<input type='email' {placeholder} bind:value={internal} {style} />
@@ -42,16 +42,12 @@
 		font-weight: 500;
 	}
 
-	div {
+	label {
 		padding: 0.75rem;
 		display: flex;
 		justify-content: space-between;
 		background: var(--neutral-high);
 		color: var(--contrast-high);
 		border-radius: 1rem;
-	}
-
-	input[type='checkbox'] {
-		accent-color: var(--plink);
 	}
 </style>

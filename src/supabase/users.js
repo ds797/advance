@@ -7,8 +7,6 @@ export const read = async () => {
 
 	if (error || status === 406) console.error(error ?? status);
 
-	console.log(data)
-
 	data = data[0].preferences;
 
 	if (data) return JSON.parse(data);
@@ -28,4 +26,7 @@ export const save = async (id, preferences) => {
 		});
 
 	if (error) console.error(error);
+
+	const { data } = await supabase.from('users').select('preferences');
+	return JSON.parse(data[0].preferences)
 }

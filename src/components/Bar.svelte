@@ -10,15 +10,15 @@
 	export let items = [];
 
 	let show = false;
-	let menu = {
+	$: menu = {
 		name: 'Account',
 		children: [{
 			name: 'Settings',
 			children: [{
 				name: '24-hour time',
 				type: 'toggle',
+				value: $preferences.hour24,
 				set: v => {
-					console.log(v)
 					$preferences.hour24 = v;
 				}
 			}]

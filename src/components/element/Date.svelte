@@ -32,7 +32,7 @@
 				{ #key internal.month }
 					<h2>{month.toLongMonth()}</h2>
 				{ /key }
-				<Text options={[2021, 2022, 2023]} selected={month.year} />
+				<h2 class='year'>{month.year}</h2>
 			</div>
 			<div class='month'>
 				<div class='days'>
@@ -89,7 +89,12 @@
 
 	.text {
 		display: flex;
+		justify-content: space-between;
 		gap: 0.25rem;
+	}
+
+	.year {
+		color: var(--contrast-low);
 	}
 
 	.days {

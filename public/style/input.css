@@ -12,3 +12,7 @@ textarea {
 	resize: none;
 	cursor: text;
 }
+
+input[type='checkbox'] {
+	accent-color: var(--plink);
+}

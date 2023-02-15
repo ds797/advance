@@ -17,11 +17,7 @@
 		if ($user) $preferences = await read();
 	});
 
-	const __update = () => {
-		if ($user) update($user.id, $preferences);
-	}
-
-	$: __update($preferences)
+	$: if ($user) update($user.id, $preferences);
 
 	const down = (e) => {
 		$mouse.buttons = e.buttons;
