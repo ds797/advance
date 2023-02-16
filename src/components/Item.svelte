@@ -2,12 +2,15 @@
 	import { route, preferences } from '../js/stores';
 	import { ampm, hour, minute } from '../timestamp/functions';
 	import { remove } from '../supabase/remove';
+  import Timestamp from '../timestamp/Timestamp';
 	import Complete from './Complete.svelte';
 	import Swatch from './element/Swatch.svelte';
 	import Trash from '../svg/Trash.svelte';
 
 	export let item;
 	export let set = v => v;
+
+	let completed;
 
 	const complete = async v => {
 		item.completed = v;
@@ -26,6 +29,7 @@
 
 	$: time = format(item);
 	$: $preferences.hour24, time = format(item);
+	$: if (item.completed) completed = item.completed.format($preferences.hour24);
 </script>
 
 <main>
@@ -36,6 +40,9 @@
 			<h3>{item.title}</h3>
 			{ #if item.start || item.finish }
 				<p>{time}</p>
+			{ /if }
+			{ #if item.completed }
+				<p class='completed'>(completed at {completed})</p>
 			{ /if }
 		</div>
 		<button type='icon' class='more'
@@ -73,4 +80,8 @@
 		align-items: center;
 		gap: 0.5rem;
 	}
+
+.completed {
+	color: var(--contrast-low);
+}
 </style>

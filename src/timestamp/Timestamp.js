@@ -77,6 +77,11 @@ export default class Timestamp {
 		return toDate(this).toLocaleDateString();
 	}
 
+	format(hour24 = false, comparison) {
+		let ampm = !hour24;
+		return `${ampm ? this.hour % 12 === 0 ? 12 : this.hour % 12 : String(this.hour).padStart(2, '0')}:${String(this.minute).padStart(2, '0')}${ampm ? `${this.hour < 12 ? ' AM' : ' PM'}` : ''}, ${this.toLongWeekday()}, ${this.toLongMonth()} ${this.date}, ${this.year}`
+	}
+
 	constructor(date = new Date(Date.now())) {
 		if (date instanceof Date) { // Construct from Date object
 			this.year = date.getFullYear();

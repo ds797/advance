@@ -17,7 +17,7 @@ export const read = async () => {
 				description: item.description,
 				start: item.start ? new Timestamp(new Date(item.start)) : undefined,
 				finish: item.finish ? new Timestamp(new Date(item.finish)) : undefined,
-				completed: item.completed,
+				completed: new Timestamp(new Date(item.completed)),
 				color: { h: item.h, s: item.s, v: item.v },
 				cal: item.cal,
 				id: item.id
