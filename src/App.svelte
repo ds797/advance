@@ -7,10 +7,7 @@
 </script>
 
 <Router {url}>
-	<Route path='/'>
-		<Home />
-	</Route>
-	<Route path='/tasks/*'>
+	<Route path='/*'>
 		<Tasks />
 	</Route>
 	<!-- <Route path='*'>
