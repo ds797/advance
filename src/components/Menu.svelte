@@ -108,6 +108,7 @@
 	}
 
 	h3 {
+		min-width: 10rem;
 		height: 2rem;
 		margin: 0;
 		display: flex;

@@ -8821,7 +8821,7 @@ var app = (function () {
     				description: item.description,
     				start: item.start ? new Timestamp(new Date(item.start)) : undefined,
     				finish: item.finish ? new Timestamp(new Date(item.finish)) : undefined,
-    				completed: new Timestamp(new Date(item.completed)),
+    				completed: item.completed ? new Timestamp(new Date(item.completed)) : null,
     				color: { h: item.h, s: item.s, v: item.v },
     				cal: item.cal,
     				id: item.id
@@ -13921,11 +13921,11 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "title svelte-1q5f5t0");
+    			attr_dev(div0, "class", "title svelte-ngmsnv");
     			add_location(div0, file$f, 42, 3, 943);
-    			attr_dev(div1, "class", "items svelte-1q5f5t0");
+    			attr_dev(div1, "class", "items svelte-ngmsnv");
     			add_location(div1, file$f, 41, 2, 920);
-    			attr_dev(main, "class", "svelte-1q5f5t0");
+    			attr_dev(main, "class", "svelte-ngmsnv");
     			add_location(main, file$f, 40, 1, 875);
     		},
     		m: function mount(target, anchor) {
@@ -14152,7 +14152,7 @@ var app = (function () {
     		c: function create() {
     			h3 = element("h3");
     			t = text(t_value);
-    			attr_dev(h3, "class", "header svelte-1q5f5t0");
+    			attr_dev(h3, "class", "header svelte-ngmsnv");
     			attr_dev(h3, "style", 'cursor: default;');
     			add_location(h3, file$f, 49, 5, 1164);
     		},
@@ -14197,7 +14197,7 @@ var app = (function () {
     			button = element("button");
     			create_component(chevron.$$.fragment);
     			attr_dev(button, "type", "icon");
-    			attr_dev(button, "class", "spacer svelte-1q5f5t0");
+    			attr_dev(button, "class", "spacer svelte-ngmsnv");
     			add_location(button, file$f, 52, 5, 1277);
     		},
     		m: function mount(target, anchor) {
@@ -14390,7 +14390,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(t_value);
-    			attr_dev(p, "class", "" + (null_to_empty('description') + " svelte-1q5f5t0"));
+    			attr_dev(p, "class", "" + (null_to_empty('description') + " svelte-ngmsnv"));
     			add_location(p, file$f, 61, 6, 1549);
     		},
     		m: function mount(target, anchor) {
@@ -14723,7 +14723,7 @@ var app = (function () {
     			t0 = space();
     			create_component(time.$$.fragment);
     			t1 = space();
-    			attr_dev(div, "class", "time svelte-1q5f5t0");
+    			attr_dev(div, "class", "time svelte-ngmsnv");
     			add_location(div, file$f, 73, 6, 2376);
     		},
     		m: function mount(target, anchor) {
