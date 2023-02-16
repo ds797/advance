@@ -1,18 +1,28 @@
 <script>
 	import { signin } from '../supabase/functions';
 	import Menu from './Menu.svelte';
+
 	let email, password;
 
-	let menu = {
-		name: 'Sign in',
+	let loading = false;
+
+	const enter = async (email, password) => {
+		loading = true;
+
+		await signin(email, password);
+		loading = false;
+	
+		return true;
+	}
+
+	$: menu = {
+		name: 'Enter Tasks',
 		key: async e => {
 			if (e.key !== 'Enter') return;
 
-			if (email && password) {
-				await signin(email, password);
-				return true;
-			}
+			return enter(email, password);
 		},
+		close: false,
 		children: [{
 			name: 'Email',
 			type: 'input',
@@ -21,10 +31,8 @@
 		}, {
 			name: 'Send link',
 			type: 'action',
-			click: async () => {
-				await signin(email, password);
-				return true;
-			}
+			disabled: loading,
+			click: () => enter(email, password)
 		}]
 	};
 

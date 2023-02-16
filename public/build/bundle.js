@@ -13921,11 +13921,11 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div0, "class", "title svelte-1yjxt2z");
+    			attr_dev(div0, "class", "title svelte-1q5f5t0");
     			add_location(div0, file$f, 42, 3, 943);
-    			attr_dev(div1, "class", "items svelte-1yjxt2z");
+    			attr_dev(div1, "class", "items svelte-1q5f5t0");
     			add_location(div1, file$f, 41, 2, 920);
-    			attr_dev(main, "class", "svelte-1yjxt2z");
+    			attr_dev(main, "class", "svelte-1q5f5t0");
     			add_location(main, file$f, 40, 1, 875);
     		},
     		m: function mount(target, anchor) {
@@ -14152,7 +14152,7 @@ var app = (function () {
     		c: function create() {
     			h3 = element("h3");
     			t = text(t_value);
-    			attr_dev(h3, "class", "header svelte-1yjxt2z");
+    			attr_dev(h3, "class", "header svelte-1q5f5t0");
     			attr_dev(h3, "style", 'cursor: default;');
     			add_location(h3, file$f, 49, 5, 1164);
     		},
@@ -14197,7 +14197,7 @@ var app = (function () {
     			button = element("button");
     			create_component(chevron.$$.fragment);
     			attr_dev(button, "type", "icon");
-    			attr_dev(button, "class", "spacer svelte-1yjxt2z");
+    			attr_dev(button, "class", "spacer svelte-1q5f5t0");
     			add_location(button, file$f, 52, 5, 1277);
     		},
     		m: function mount(target, anchor) {
@@ -14390,7 +14390,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(t_value);
-    			attr_dev(p, "class", "" + (null_to_empty('description') + " svelte-1yjxt2z"));
+    			attr_dev(p, "class", "" + (null_to_empty('description') + " svelte-1q5f5t0"));
     			add_location(p, file$f, 61, 6, 1549);
     		},
     		m: function mount(target, anchor) {
@@ -14723,8 +14723,8 @@ var app = (function () {
     			t0 = space();
     			create_component(time.$$.fragment);
     			t1 = space();
-    			attr_dev(div, "class", "time svelte-1yjxt2z");
-    			add_location(div, file$f, 73, 6, 2344);
+    			attr_dev(div, "class", "time svelte-1q5f5t0");
+    			add_location(div, file$f, 73, 6, 2376);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -14906,6 +14906,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			t = text(t_value);
+    			toggle_class(button, "disabled", /*child*/ ctx[13].disabled);
     			add_location(button, file$f, 67, 6, 1847);
     		},
     		m: function mount(target, anchor) {
@@ -14920,6 +14921,10 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
     			if (dirty & /*menu*/ 1 && t_value !== (t_value = /*child*/ ctx[13].name + "")) set_data_dev(t, t_value);
+
+    			if (dirty & /*menu*/ 1) {
+    				toggle_class(button, "disabled", /*child*/ ctx[13].disabled);
+    			}
     		},
     		i: noop$2,
     		o: noop$2,
@@ -17559,7 +17564,7 @@ var app = (function () {
     	let current;
 
     	function menu_1_menu_binding(value) {
-    		/*menu_1_menu_binding*/ ctx[1](value);
+    		/*menu_1_menu_binding*/ ctx[3](value);
     	}
 
     	let menu_1_props = {};
@@ -17619,36 +17624,17 @@ var app = (function () {
     }
 
     function instance$7($$self, $$props, $$invalidate) {
+    	let menu;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Login', slots, []);
     	let email, password;
+    	let loading = false;
 
-    	let menu = {
-    		name: 'Sign in',
-    		key: async e => {
-    			if (e.key !== 'Enter') return;
-
-    			if (email && password) {
-    				await signin(email, password);
-    				return true;
-    			}
-    		},
-    		children: [
-    			{
-    				name: 'Email',
-    				type: 'input',
-    				value: email,
-    				set: v => email = v
-    			},
-    			{
-    				name: 'Send link',
-    				type: 'action',
-    				click: async () => {
-    					await signin(email, password);
-    					return true;
-    				}
-    			}
-    		]
+    	const enter = async (email, password) => {
+    		$$invalidate(2, loading = true);
+    		await signin(email, password);
+    		$$invalidate(2, loading = false);
+    		return true;
     	};
 
     	const writable_props = [];
@@ -17659,14 +17645,23 @@ var app = (function () {
 
     	function menu_1_menu_binding(value) {
     		menu = value;
-    		$$invalidate(0, menu);
+    		((($$invalidate(0, menu), $$invalidate(1, email)), $$invalidate(4, password)), $$invalidate(2, loading));
     	}
 
-    	$$self.$capture_state = () => ({ signin, Menu, email, password, menu });
+    	$$self.$capture_state = () => ({
+    		signin,
+    		Menu,
+    		email,
+    		password,
+    		loading,
+    		enter,
+    		menu
+    	});
 
     	$$self.$inject_state = $$props => {
-    		if ('email' in $$props) email = $$props.email;
-    		if ('password' in $$props) password = $$props.password;
+    		if ('email' in $$props) $$invalidate(1, email = $$props.email);
+    		if ('password' in $$props) $$invalidate(4, password = $$props.password);
+    		if ('loading' in $$props) $$invalidate(2, loading = $$props.loading);
     		if ('menu' in $$props) $$invalidate(0, menu = $$props.menu);
     	};
 
@@ -17674,7 +17669,34 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [menu, menu_1_menu_binding];
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*email, loading*/ 6) {
+    			$$invalidate(0, menu = {
+    				name: 'Enter Tasks',
+    				key: async e => {
+    					if (e.key !== 'Enter') return;
+    					return enter(email, password);
+    				},
+    				close: false,
+    				children: [
+    					{
+    						name: 'Email',
+    						type: 'input',
+    						value: email,
+    						set: v => $$invalidate(1, email = v)
+    					},
+    					{
+    						name: 'Send link',
+    						type: 'action',
+    						disabled: loading,
+    						click: () => enter(email, password)
+    					}
+    				]
+    			});
+    		}
+    	};
+
+    	return [menu, email, loading, menu_1_menu_binding];
     }
 
     class Login extends SvelteComponentDev {

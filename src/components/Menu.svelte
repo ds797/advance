@@ -65,7 +65,7 @@
 					{ #if child.name && (child.type ?? 'menu') === 'menu' }
 						<button class='inverse' on:click={() => child.click ? child.click() : show = index}>{child.name}</button>
 					{ :else if child.name && child.type === 'action' }
-						<button on:click={() => action(child)}>{child.name}</button>
+						<button class:disabled={child.disabled} on:click={() => action(child)}>{child.name}</button>
 					{ :else if child.type === 'input' }
 						<Input value={child.value} name={child.name} placeholder={child.placeholder} set={child.set ?? blank} style={child.css ?? ''} />
 					{ :else if child.type === 'textarea' }
@@ -108,9 +108,10 @@
 	}
 
 	h3 {
-		width: 10rem;
+		height: 2rem;
 		margin: 0;
-		text-align: center;
+		display: flex;
+		align-items: center;
 		cursor: pointer;
 		user-select: none;
 		white-space: nowrap;
@@ -133,7 +134,7 @@
 
 	.title {
 		display: flex;
-		align-items: center;
+		align-items: stretch;
 		gap: 0.5rem;
 	}
 
