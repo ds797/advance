@@ -2971,7 +2971,7 @@ var app = (function () {
     			main = element("main");
     			div = element("div");
     			h1 = element("h1");
-    			h1.textContent = "Tasks";
+    			h1.textContent = "Advance";
     			t1 = space();
     			create_component(go.$$.fragment);
     			add_location(h1, file$v, 6, 2, 68);
@@ -17672,7 +17672,7 @@ var app = (function () {
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*email, loading*/ 6) {
     			$$invalidate(0, menu = {
-    				name: 'Enter Tasks',
+    				name: 'Enter Advance',
     				key: async e => {
     					if (e.key !== 'Enter') return;
     					return enter(email, password);
@@ -19516,7 +19516,7 @@ var app = (function () {
     			button = element("button");
     			create_component(add.$$.fragment);
     			attr_dev(button, "type", "icon");
-    			attr_dev(button, "class", "new svelte-1h1yi05");
+    			attr_dev(button, "class", "new svelte-rztvy8");
     			add_location(button, file, 145, 3, 3203);
     		},
     		m: function mount(target, anchor) {
@@ -19832,7 +19832,7 @@ var app = (function () {
     			create_component(stack_1.$$.fragment);
     			t = space();
     			if_block.c();
-    			attr_dev(main, "class", "svelte-1h1yi05");
+    			attr_dev(main, "class", "svelte-rztvy8");
     			add_location(main, file, 130, 0, 2776);
     		},
     		l: function claim(nodes) {
