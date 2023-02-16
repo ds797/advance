@@ -4,7 +4,7 @@
 
 <main>
 	<div>
-		<h1>Tasks</h1>
+		<h1>Advance</h1>
 		<Go />
 	</div>
 	<!-- <p>Just clicked the magic link? There's currently a bug where once you click "Go", you'll be back at the login page. To fix this, just click "Go" and then reload the page. A solution is being implemented!</p> -->

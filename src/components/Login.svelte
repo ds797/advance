@@ -16,7 +16,7 @@
 	}
 
 	$: menu = {
-		name: 'Enter Tasks',
+		name: 'Enter Advance',
 		key: async e => {
 			if (e.key !== 'Enter') return;
 
