@@ -77,7 +77,7 @@ export default class Timestamp {
 		return toDate(this).toLocaleDateString();
 	}
 
-	format(hour24 = false, comparison) {
+	format(hour24 = false, comparison) { // TODO: "yesterday", "tuesday", "monday", "last thursday", "January 12", etc.
 		let ampm = !hour24;
 		return `${ampm ? this.hour % 12 === 0 ? 12 : this.hour % 12 : String(this.hour).padStart(2, '0')}:${String(this.minute).padStart(2, '0')}${ampm ? `${this.hour < 12 ? ' AM' : ' PM'}` : ''}, ${this.toLongWeekday()}, ${this.toLongMonth()} ${this.date}, ${this.year}`
 	}

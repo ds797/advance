@@ -2963,8 +2963,6 @@ var app = (function () {
     	let h1;
     	let t1;
     	let go;
-    	let t2;
-    	let p;
     	let current;
     	go = new Go({ $$inline: true });
 
@@ -2976,15 +2974,10 @@ var app = (function () {
     			h1.textContent = "Tasks";
     			t1 = space();
     			create_component(go.$$.fragment);
-    			t2 = space();
-    			p = element("p");
-    			p.textContent = "Just clicked the magic link? There's currently a bug where once you click \"Go\", you'll be back at the login page. To fix this, just click \"Go\" and then reload the page. A solution is being implemented!";
     			add_location(h1, file$v, 6, 2, 68);
-    			attr_dev(div, "class", "svelte-xowzl1");
+    			attr_dev(div, "class", "svelte-13q6opj");
     			add_location(div, file$v, 5, 1, 60);
-    			attr_dev(p, "class", "svelte-xowzl1");
-    			add_location(p, file$v, 9, 1, 101);
-    			attr_dev(main, "class", "svelte-xowzl1");
+    			attr_dev(main, "class", "svelte-13q6opj");
     			add_location(main, file$v, 4, 0, 52);
     		},
     		l: function claim(nodes) {
@@ -2996,8 +2989,6 @@ var app = (function () {
     			append_dev(div, h1);
     			append_dev(div, t1);
     			mount_component(go, div, null);
-    			append_dev(main, t2);
-    			append_dev(main, p);
     			current = true;
     		},
     		p: noop$2,
@@ -8788,7 +8779,7 @@ var app = (function () {
     		return date$1(this).toLocaleDateString();
     	}
 
-    	format(hour24 = false, comparison) {
+    	format(hour24 = false, comparison) { // TODO: "yesterday", "tuesday", "monday", "last thursday", "January 12", etc.
     		let ampm = !hour24;
     		return `${ampm ? this.hour % 12 === 0 ? 12 : this.hour % 12 : String(this.hour).padStart(2, '0')}:${String(this.minute).padStart(2, '0')}${ampm ? `${this.hour < 12 ? ' AM' : ' PM'}` : ''}, ${this.toLongWeekday()}, ${this.toLongMonth()} ${this.date}, ${this.year}`
     	}
