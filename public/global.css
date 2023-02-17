@@ -5,6 +5,8 @@
 @import url('./style/selection.css');
 
 :root {
+	height: 100%;
+
 	/* -- Fonts -- */
 	--font: Rubik;
 	--weight: 400;
