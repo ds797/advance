@@ -1,4 +1,6 @@
 <script>
+	import Check from '../../svg/Check.svelte';
+
 	export let type = 'text';
 	export let value = '';
 	export let name = '';
@@ -18,10 +20,12 @@
 		<h4>{name}</h4>
 		<textarea type='text' {placeholder} bind:value={internal} {style} />
 	{ :else if type === 'toggle' }
-		<label>
+		<button class='inverse' on:click={() => internal = !internal}>
 			{name}
-			<input type='checkbox' bind:checked={internal} />
-		</label>
+			<div class:toggled={internal}>
+				<Check size='1.5rem' />
+			</div>
+		</button>
 	{ :else if type === 'email' }
 		<h4>{name}</h4>
 		<input type='email' {placeholder} bind:value={internal} {style} />
@@ -49,5 +53,24 @@
 		background: var(--neutral-high);
 		color: var(--contrast-high);
 		border-radius: 1rem;
+	}
+
+	button {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	div {
+		width: 1.5rem;
+		height: 1.5rem;
+		background: none;
+		color: var(--contrast-high);
+		border-radius: 0.5rem;
+	}
+
+	.toggled {
+		background: var(--plink);
+		color: var(--neutral-high);
 	}
 </style>

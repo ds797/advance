@@ -41,13 +41,11 @@
 	<main transition:slide={{ axis: 'both' }}>
 		<div class='items'>
 			<div class='title'>
-				{ #if (menu.close ?? true) }
-					<button type='icon' on:click={() => dispatch('close')}>
-						<Chevron direction={'left'} size={'1.5rem'} />
-					</button>
-				{ /if }
+				<button type='icon' class:disabled={!(menu.close ?? true)} on:click={() => dispatch('close')}>
+					<Chevron direction={'left'} size={'1.5rem'} />
+				</button>
 				{ #if menu.name }
-					<h3 class='header' style={'cursor: default;'}>{menu.name}</h3>
+					<h3 style={'cursor: default;'}>{menu.name}</h3>
 				{ /if }
 				{ #if (menu.close ?? true) }
 					<button type='icon' class='spacer' on:click={() => dispatch('close')}>

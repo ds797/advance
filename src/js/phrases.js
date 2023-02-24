@@ -1,18 +1,21 @@
-import { random } from './math';
+import Timestamp from '../timestamp/Timestamp';
+import { difference } from '../timestamp/functions';
 
-export const title = () => {
-	const titles = [{
-		title: 'Party!',
-		description: 'All night'
-	}, {
-		title: 'Work',
-		description: 'Bring laptop'
-	}, {
-		title: 'Spend time with friends',
-		description: 'Pre-order lunch'
-	}, {
-		title: 'Family dinner',
-		description: 'At Mom\'s house'
-	}];
-	return titles[random(titles.length - 1)];
+// const YEAR = 365 * 
+
+export const time = timestamp => {
+	const now = new Timestamp();
+	let s = '';
+
+	let a = new Timestamp();
+	let b = new Timestamp().add({ months: 11 });
+
+	let d = difference(b, a);
+	d.add({ months: 0 }) (12 + d.month) % 12;
+	console.log(d);
+	// let d = difference(timestamp, now);
+
+
+
+	return s;
 }

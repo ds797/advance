@@ -1,15 +1,22 @@
 <script>
 	import { preferences } from '../js/stores';
-	import { signout } from '../supabase/functions';
+	import { signout, update } from '../supabase/functions';
 	import Sync from './Sync.svelte';
 	import Stats from './Stats.svelte';
 	import Modal from './Modal.svelte';
 	import Menu from './Menu.svelte';
 	import Person from '../icons/filled/Person.svelte';
+	// import { time } from '../js/phrases';
+  // import Timestamp from '../timestamp/Timestamp';
 
 	export let items = [];
 
+	// time(new Timestamp().add({ date: -3 }));
+
 	let show = false;
+
+	let email, password;
+
 	$: menu = {
 		name: 'Account',
 		children: [{
@@ -21,7 +28,19 @@
 				set: v => {
 					$preferences.hour24 = v;
 				}
-			}]
+			}/*, {
+				name: 'Change email',
+				children: [{
+					name: 'New email',
+					type: 'input',
+					value: email,
+					set: v => email = v
+				}, {
+					name: 'Save',
+					type: 'action',
+					click: () => update({ email, password })
+				}],
+			}*/]
 		}, {
 			name: 'Sign out',
 			type: 'action',

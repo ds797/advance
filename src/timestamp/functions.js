@@ -109,6 +109,24 @@ export const difference = (ts1, ts2) => { // TODO: Optimize!!!
 	return new Timestamp(new Date(Math.floor(ts2 - ts1)));
 }
 
+// export const difference = (ts1, ts2) => { // TODO: Optimize
+// 	let abc = new Timestamp(new Date(utc(ts1) - utc(ts2)));
+
+// 	console.log(new Date(__date(ts1).getTime() - __date(ts2).getTime()))																																																									
+
+// 	let t = new Timestamp({
+// 		year: ts1.year - ts2.year,
+// 		month: ts1.month - ts2.month,
+// 		date: ts1.date - ts2.date,
+// 		hour: ts1.hour - ts2.hour,
+// 		minute: ts1.minute - ts2.minute,
+// 		second: ts1.second - ts2.second,
+// 		milli: ts1.milli - ts2.milli
+// 	});
+
+// 	return t;
+// }
+
 export const ampmify = value => (value - 1) % 12 + 1;
 
 export const stringify = ts => {

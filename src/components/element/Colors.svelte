@@ -11,10 +11,19 @@
 	const check = (one, two) => {
 		if (one.h === two.h && one.s === two.s && one.v === two.v) return true;
 	}
+
+	let backup = [{
+		name: 'Red', h: 0, s: 100, v: 100
+	}, {
+		name: 'Green', h: 120, s: 100, v: 100
+	}, {
+		name: 'Blue', h: 240, s: 100, v: 100
+	}];
+	console.log(backup)
 </script>
 
 <main>
-	{ #each $preferences.colors ?? [] as color, index (color) }
+	{ #each $preferences.colors ?? backup as color, index (color) }
 		<div class='color' on:click={() => set(color)} transition:slide|local>
 			<div class='name' style='{index === value && 'background: var(--secondary); color: var(--primary);'}'>
 				<Swatch value={color} size='1.5rem' />

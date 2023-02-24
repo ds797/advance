@@ -38,3 +38,11 @@ export const signout = async () => {
 	// 	console.error(error.error_description || error.message);
 	// }
 }
+
+export const update = async ({ email, password }) => {
+	const { data, error } = supabase.auth.update({ email, password });
+
+	if (error) console.error(error);
+
+	return data;
+}
