@@ -21,8 +21,8 @@
 		let string = '';
 	
 		if (item.start && item.finish) string = `from ${hour(item.start.hour)}:${minute(item.start.minute)} ${ampm(item.start.hour)} to ${hour(item.finish.hour)}:${minute(item.finish.minute)} ${ampm(item.finish.hour)}`;
-		else if (item.start) string = `at ${hour(item.start.hour)}:${minute(item.start.minute)} ${ampm(item.start.hour)}`;
-		else if (item.finish) string = `by ${hour(item.finish.hour)}:${minute(item.finish.minute)} ${ampm(item.finish.hour)}`;
+		else if (item.start) string = `at ${item.finish.format($preferences.hour24)}`;
+		else if (item.finish) string = `by ${item.finish.format($preferences.hour24)}`;
 	
 		return string;
 	}
